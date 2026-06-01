@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
     /*outline: 1px solid red;*/
 }
 
@@ -556,40 +557,464 @@ p{
     color: var(--azul-escuro-color);
 }
 
-.abordagem-clinica{
+.abordagem-clinica {
     display: grid;
-    grid-template-columns: 1fr 20fr 1fr;
+    grid-template-columns: 80px minmax(0, 1fr) 80px;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    padding: 25px;
+    padding: 20px 15px 105px;
     background-color: var(--marrom-claro-color);
 }
 
-.container-abordagem{
+.abordagem-clinica > img {
+    width: 65px;
+    height: 65px;
+    align-self: center;
+    justify-self: center;
+    transform: translateY(42.5px);
+}
+
+.container-abordagem {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    justify-content: center;
     width: 100%;
-    padding: 20px 350px;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
 }
 
-.h2-abordagem{
+.h2-abordagem {
+    margin: 0 0 12px;
     font-family: var(--font-family);
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
     font-weight: 300;
-    font-size: 3.5rem;
+    letter-spacing: 0.12em;
     color: var(--text-color);
-    margin-top: -20px;
-    margin-bottom: 20px;
-    letter-spacing: 0.15em;
 }
 
-.p-abordagem{
+.p-abordagem {
+    width: 75%;
+    margin: 0;
     font-family: var(--font-family);
+    font-size: clamp(1rem, 1.25vw, 1.5rem);
+    text-align: center;
     font-weight: 400;
-    font-size: 1.5rem;
-    line-height: 1.5;
+    line-height: 1.3;
     color: var(--text-color);
+}
+
+.area-atuacao {
+    position: relative;
+    padding: 0 3vw 35px;
+    background-color: var(--bege-color);
+}
+
+.container-area-atuacao {
+    position: relative;
+    z-index: 1;
+
+    width: 94vw;
+    margin: 0 auto -60px;
+    padding: 20px 70px 90px;
+
+    background-color: var(--branco-frio-color);
+    border-radius: 20px;
+
+    transform: translateY(-60px);
+}
+
+.atuacao h1 {
+    margin: 0 0 20px;
+    font-family: var(--font-family);
+    font-size: 3.7rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    color: var(--marrom-claro-color);
+}
+
+.lista-terapias {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(50px, 8vw, 155px);
+}
+
+.terapias {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.t-adultos {
+    width: 100%;
+    aspect-ratio: 452 / 262;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.h2-terapias {
+    margin-top: 10px;
+    font-family: var(--font-family);
+    font-size: clamp(1.35rem, 1.65vw, 2rem);
+    line-height: 1;
+    color: var(--azul-medio-color);
+}
+
+.p-terapias {
+    flex: 1;
+    margin-top: 10px;
+    font-family: var(--font-family);
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.35;
+    text-align: justify;
+    color: var(--azul-escuro-color);
+}
+
+.btn-terapias {
+    align-self: center;
+    width: 80%;
+    margin-top: 20px;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 5px;
+
+    background-color: var(--azul-medio-color);
+    color: white;
+    font-family: var(--font-family);
+    font-size: clamp(1rem, 1.4vw, 1.7rem);
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.btn-terapias:hover {
+    background-color: var(--azul-escuro-color);
+    transform: translateY(-2px);
+    transition: 0.8s ease;
+}
+
+.btn-terapias:active {
+    background-color: var(--azul-claro-color);
+    transform: translateY(2px);
+    transition: 0.8s ease;
+    color: var(--azul-escuro-color);
+}
+
+/* Ajuste necessário no painel cinza principal */
+.container-area-atuacao {
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+/* Linha horizontal acima de Diferenciais */
+.line {
+    width: 68%;
+    height: 2px;
+    margin: 95px auto 70px;
+    background-color: var(--marrom-claro-color);
+}
+
+.p-line {
+    display: none;
+}
+
+/* Bloco inferior do painel */
+.diferenciais {
+    position: relative;
+    min-height: 780px;
+    padding-bottom: 70px;
+}
+
+.diferenciais > h1 {
+    margin: 10px  0;
+    font-family: var(--font-family);
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    color: var(--marrom-claro-color);
+}
+
+
+.acolhimento,
+.Especializacao,
+.Confianca {
+    position: relative;
+    z-index: 2;
+    width: 65%;
+    margin-bottom: 20px;
+}
+
+.acolhimento h2,
+.Especializacao h2,
+.Confianca h2 {
+    margin-bottom: 4px;
+    font-family: var(--font-family);
+    font-size: 1.7rem;
+    color: var(--azul-medio-color);
+}
+
+.acolhimento p,
+.Especializacao p,
+.Confianca p {
+    font-family: var(--font-family);
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.25;
+    color: var(--azul-escuro-color);
+}
+
+.btn-diferenciais {
+    position: relative;
+    z-index: 2;
+    margin-top: 50px;
+    padding: 10px 45px;
+    border: none;
+    border-radius: 5px;
+
+    background-color: var(--azul-medio-color);
+    color: white;
+    font-family: var(--font-family);
+    font-size: 2rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+.btn-diferenciais:hover {
+    background-color: var(--azul-escuro-color);
+    transform: translateY(-2px);
+    transition: 0.8s ease;
+}
+
+.btn-diferenciais:active {
+    background-color: var(--azul-claro-color);
+    transform: translateY(2px);
+    transition: 0.8s ease;
+    color: var(--azul-escuro-color);
+}
+
+/* Foto presa ao canto inferior direito */
+.img-diferenciais {
+    position: absolute;
+    right: -55px;
+    bottom: 0;
+    z-index: 1;
+
+    width: 76%;
+    height: auto;
+    object-fit: contain;
+    object-position: right bottom;
+    pointer-events: none;
+}
+
+.p-diferenciais {
+    width: 80%;
+    font-family: var(--font-family);
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: var(--azul-escuro-color);
+}
+
+.processo-terapeutico {
+    padding: 100px 3vw 150px;
+    background-color: var(--bege-color);
+}
+
+.p-terapeutico {
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--azul-medio-color);
+}
+
+.p-terapeutico .processo {
+    color: var(--marrom-claro-color);
+}
+
+/* Três cards visíveis */
+.carrossel {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(50px, 6.5vw, 125px);
+
+    width: min(86vw, 1650px);
+    margin: 90px auto 0;
+}
+
+.carrossel > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 575px;
+    padding: 25px 60px 40px;
+
+    background-color: var(--branco-frio-color);
+    border: 2px solid var(--azul-claro-color);
+    border-radius: 18px;
+}
+
+/* O quarto card aparecerá depois com JS */
+.carrossel > div:nth-child(n + 4),
+.carrossel > div.card-processo-oculto {
+    display: none;
+}
+
+.carrossel > div.card-processo-visivel {
+    display: flex;
+    animation: entrada-carrossel 0.35s ease;
+}
+
+.img-processo {
+    display: block;
+    width: 100%;
+    height: 180px;
+    margin: 0 auto 20px;
+    object-fit: contain;
+}
+
+.titulo-processo {
+    margin: 0 0 12px;
+    font-family: var(--font-family);
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--azul-medio-color);
+}
+
+.p-processo {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: clamp(1rem, 1vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--azul-escuro-color);
+}
+
+/* Setas clicáveis criadas pelo JavaScript */
+.btn-carrossel-processo {
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    height: 60px;
+
+    border: none;
+    background-color: transparent;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.btn-carrossel-processo:hover {
+    transform: translateY(-50%) scale(1.08);
+}
+
+.btn-carrossel-processo:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.btn-carrossel-processo[hidden] {
+    display: none;
+}
+
+.btn-carrossel-anterior {
+    left: -80px;
+    background-image: url("./assets/FLECHA CARROSSEL PROCESSO TERAPEUTICO 1.png");
+}
+
+.btn-carrossel-proximo {
+    right: -80px;
+    background-image: url("./assets/FLECHA CARROSSEL PROCESSO TERAPEUTICO 2.png");
+}
+
+@keyframes entrada-carrossel {
+    from {
+        opacity: 0;
+        transform: translateX(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Linha marrom com pontos */
+.line-pontilhada {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: min(86vw, 1601px);
+    height: 10px;
+    margin: 110px auto 0;
+}
+
+.line-pontilhada::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background-color: var(--marrom-claro-color);
+}
+
+.line-pontilhada::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 82%;
+    width: 18%;
+    height: 10px;
+
+    background-color: var(--bege-color);
+    background-image: radial-gradient(
+        circle,
+        var(--marrom-claro-color) 0 2px,
+        transparent 2.2px
+    );
+    background-position: center;
+    background-size: 18px 10px;
+    background-repeat: repeat-x;
+
+    transition: left 0.65s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: left;
+}
+
+.line-pontilhada.pontilhado-esquerda::after {
+    left: 0;
+}
+
+.depoimentos {
+    padding: 100px 3vw;
+    background-color: var(--bege-color);
+}
+
+.h1-depoimentos {
+    margin: 0 0 12px;
+    font-family: var(--font-family);
+    margin-left: 60px;
+    font-size: 3.7rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    color: var(--marrom-claro-color);
+}
+
+
+.p-depoimento {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: 1.7rem;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--azul-escuro-color);
+    margin-left: 60px;;
 }
