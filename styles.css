@@ -3,7 +3,11 @@
     padding: 0;
     box-sizing: border-box;
     user-select: none;
-    /*outline: 1px solid red;*/
+    outline: none;
+}
+
+*:focus {
+    outline: none;
 }
 
 
@@ -108,13 +112,13 @@ li{
 }
 
 .btn-header:hover{
-    scale: 1.02;
+    transform: scale(1.02);
     background-color: var(--azul-medio-color);
     transition: 0.8s ease;
 }
 
 .btn-header:active{
-    scale: 0.98;
+    transform: scale(0.98);
     background-color: var(--azul-claro-color);
     transition: 0.8s ease;
     color: var(--azul-escuro-color);
@@ -128,13 +132,71 @@ li{
     margin-top: 50px;
 }
 
+.nome-titulo {
+    line-height: 0;
+}
+
+.nome{
+    display: block;
+    width: 800px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    overflow: visible;
+}
+
+.nome .cls-1 {
+    fill: rgba(40, 81, 140, 0);
+    stroke: var(--azul-medio-color);
+    stroke-width: 1px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+}
+
+.nome.animar .cls-1 {
+    animation: nome 1.8s linear forwards;
+}
+
+@keyframes nome {
+    80% {
+        stroke-dashoffset: 0;
+        fill: rgba(62, 125, 214, 0.15);
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        fill: var(--azul-medio-color);
+    }
+}
+
 .h2-section{
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 2.5rem;
     color: var(--marrom-claro-color);
+    opacity: 0;
+    transform: translateY(20px);
 }
 
+.h2-section.animar {
+    animation: psicologo 1.7s ease forwards;
+}
+
+@keyframes psicologo {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
 .h1-section{
     font-family: var(--font-family);
     font-weight: bold;
@@ -144,13 +206,50 @@ li{
     margin-left: -8px;
 }
 
+.h1-section {
+    color: var(--azul-medio-color);
+    animation: entrada-titulo 2s ease forwards;
+}
+
+@keyframes entrada-titulo {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+*/
+
 .h3-section{
     font-family: var(--font-family);
     font-weight: 600;
     font-size: 1.5rem;
     color: var(--azul-escuro-color);
     margin-top: -20px;
+    opacity: 0;
+    transform: translateY(25px);
 }
+
+.h3-section.animar {
+    animation: alternate-entrada-titulo 1.7s ease forwards;
+}
+
+@keyframes alternate-entrada-titulo {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 .container-apresentacao {
     padding: 50px;
@@ -170,11 +269,10 @@ li{
 .container-psico{
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: flex-start;
     width: 40vw;
-    height: 60vh;
+    height: auto;
     padding: 50px;
-    margin-top: 50px;
 }
 
 .h2-psico{
@@ -194,8 +292,8 @@ li{
 
 .container-btn{
     display: flex;
-    justify-content: left;
-    align-items: left;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding: 0 50px;
     margin-bottom: 100px;
 }
@@ -210,22 +308,41 @@ li{
     padding: 3px 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: -30px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.btn-psico.animar {
+    animation: entrada-btn-psico 2s ease forwards;
+}
+
+@keyframes entrada-btn-psico {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .btn-psico:hover{
-    scale: 1.02;
+    transform: scale(1.02);
     background-color: var(--azul-medio-color);
     transition: 0.8s ease;
 }
 
 .btn-psico:active{
-    scale: 0.98;
+    transform: scale(0.98);
     background-color: var(--azul-claro-color);
     transition: 0.8s ease;
     color: var(--azul-escuro-color);
 }
 
+
+/*Como você está se sentindo?*/
 .container-sentidos {
     display: flex;
     justify-content: center;
@@ -250,11 +367,79 @@ li{
 }
 
 .titulo-emocoes {
+    --typing-steps: 43;
+
     font-family: var(--font-family);
     font-weight: 800;
     font-size: 3rem;
     color: var(--azul-medio-color);
     margin-top: -50px;
+}
+
+.texto-digitando {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: bottom;
+    opacity: 0;
+    color: var(--azul-medio-color);
+    clip-path: inset(0 100% 0 0);
+}
+
+.texto-digitando::after {
+    content: "";
+    position: absolute;
+    top: 0.08em;
+    bottom: 0.08em;
+    left: 0;
+    width: 0.08em;
+    background-color: transparent;
+}
+
+.titulo-emocoes.animar .texto-digitando,
+.p-terapeutico.animar .texto-digitando {
+    opacity: 1;
+    animation: digitando-texto 0.7s steps(var(--typing-steps), end) forwards;
+}
+
+.titulo-emocoes.animar .texto-digitando::after,
+.p-terapeutico.animar .texto-digitando::after {
+    animation:
+        cursor-andando 0.7s steps(var(--typing-steps), end) forwards,
+        cursor-digitando 0.25s step-end 3;
+}
+
+.texto-digitando .destaque-digitando,
+.texto-digitando .processo {
+    color: var(--marrom-claro-color);
+}
+
+@keyframes digitando-texto {
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes cursor-andando {
+    from {
+        left: 0;
+        background-color: var(--azul-medio-color);
+    }
+
+    to {
+        left: 100%;
+        background-color: transparent;
+    }
+}
+
+@keyframes cursor-digitando {
+    0%, 100% {
+        background-color: var(--azul-medio-color);
+    }
+
+    50% {
+        background-color: transparent;
+    }
 }
 
 span{
@@ -451,6 +636,7 @@ p{
     color: var(--azul-escuro-color);
 }
 
+/* Sobre mim */
 .container-sobre{
     display: flex;
     align-items: center;
@@ -469,6 +655,28 @@ p{
     background-color: var(--bege-color);
 }
 
+.img-sobre-imagens{
+    will-change: filter;
+}
+
+.img-sobre-imagens.animar {
+    animation: luz-sobre-piscando 2s ease-in-out infinite;
+}
+
+@keyframes luz-sobre-piscando {
+    0%, 100% {
+        filter:
+            drop-shadow(0 0 8px rgba(167, 135, 104, 0.45))
+            drop-shadow(0 0 20px rgba(167, 135, 104, 0.28));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 18px rgba(167, 135, 104, 0.85))
+            drop-shadow(0 0 42px rgba(167, 135, 104, 0.55));
+    }
+}
+
 .sobre-mim{
     display: flex;
     align-items: center;
@@ -482,14 +690,17 @@ p{
     transition: 1s ease;
 }
 
+/*Foto=Sobre Leonir Sentado*/
 .img-sobre{
     margin-left: 80px;
+    width: 1800px;
+    height: auto;
 }
 
 .informacoes-sobre-mim{
     display: flex;
     flex-direction: column;
-    justify-content: right;
+    justify-content: center;
     width: 94vw;
     height: 50vh;
     padding: 0 50px;
@@ -498,10 +709,28 @@ p{
 .sobre-leo{
     font-family: var(--font-family);
     font-weight: 300;
-    font-size: 3.5rem;
+    font-size: 3rem;
     color: var(--marrom-claro-color);
     text-align: right;
-    margin-top: -100px;
+    margin-top: 50px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.sobre-leo.animar {
+    animation: entrada-sobre-leo 2s ease forwards;
+}
+
+@keyframes entrada-sobre-leo {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .leonir{
@@ -510,6 +739,24 @@ p{
     font-size: 5rem;
     color: var(--azul-medio-color);
     text-align: right;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.leonir.animar {
+    animation: entrada-leonir 2s ease forwards;
+}
+
+@keyframes entrada-leonir {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .crp{
@@ -524,7 +771,7 @@ p{
 .texto-sobre-leo{
     font-family: var(--font-family);
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     color: var(--azul-escuro-color);
     text-align: right;
     margin-top: 20px;
@@ -542,16 +789,34 @@ p{
     cursor: pointer;
     align-self: flex-end;
     margin-top: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.btn-sobre.animar {
+    animation: entrada-btn-sobre 2s ease forwards;
+}
+
+@keyframes entrada-btn-sobre {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .btn-sobre:hover{
-    scale: 1.02;
+    transform: scale(1.02);
     background-color: var(--azul-escuro-color);
     transition: 0.8s ease;
 }
 
 .btn-sobre:active{
-    scale: 0.98;
+    transform: scale(0.98);
     background-color: var(--azul-claro-color);
     transition: 0.8s ease;
     color: var(--azul-escuro-color);
@@ -738,6 +1003,17 @@ p{
     color: var(--marrom-claro-color);
 }
 
+@keyframes entrada-p-diferenciais {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .acolhimento,
 .Especializacao,
@@ -815,6 +1091,12 @@ p{
     font-size: 1.2rem;
     line-height: 1.4;
     color: var(--azul-escuro-color);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.p-diferenciais.animar {
+    animation: entrada-p-diferenciais 2s ease forwards;
 }
 
 .processo-terapeutico {
@@ -823,6 +1105,8 @@ p{
 }
 
 .p-terapeutico {
+    --typing-steps: 45;
+
     margin: 0;
     text-align: center;
     font-family: var(--font-family);
@@ -849,12 +1133,15 @@ p{
 .carrossel > div {
     display: flex;
     flex-direction: column;
-    min-height: 575px;
+    height: 575px;
     padding: 25px 60px 40px;
+    overflow: hidden;
 
     background-color: var(--branco-frio-color);
     border: 2px solid var(--azul-claro-color);
     border-radius: 18px;
+    backface-visibility: hidden;
+    will-change: opacity, transform;
 }
 
 /* O quarto card aparecerá depois com JS */
@@ -863,9 +1150,9 @@ p{
     display: none;
 }
 
-.carrossel > div.card-processo-visivel {
+.carrossel.animar > div.card-processo-visivel {
     display: flex;
-    animation: entrada-carrossel 0.35s ease;
+    animation: entrada-carrossel 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .img-processo {
@@ -937,17 +1224,33 @@ p{
 @keyframes entrada-carrossel {
     from {
         opacity: 0;
-        transform: translateX(12px);
+        transform: translateX(8px) scale(0.985);
     }
 
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0) scale(1);
     }
+}
+
+
+.img-processo{
+    width: 60%;
+}
+
+.img-carrossel-processo {
+    display: block;
+    width: 100%;
+    height: 180px;
+    margin: 0 auto 20px;
+    object-fit: contain;
 }
 
 /* Linha marrom com pontos */
 .line-pontilhada {
+    --pontilhado-inicio: 75%;
+    --pontilhado-largura: 25%;
+
     display: block;
     position: relative;
     overflow: hidden;
@@ -970,8 +1273,8 @@ p{
     content: "";
     position: absolute;
     top: 0;
-    left: 82%;
-    width: 18%;
+    left: var(--pontilhado-inicio);
+    width: var(--pontilhado-largura);
     height: 10px;
 
     background-color: var(--bege-color);
@@ -980,20 +1283,34 @@ p{
         var(--marrom-claro-color) 0 2px,
         transparent 2.2px
     );
-    background-position: center;
+    background-position: 0 center;
     background-size: 18px 10px;
     background-repeat: repeat-x;
 
-    transition: left 0.65s cubic-bezier(0.65, 0, 0.35, 1);
-    will-change: left;
+    animation: pontilhado-em-movimento 1.2s linear infinite;
+    animation-play-state: paused;
+    transition:
+        left 0.65s cubic-bezier(0.65, 0, 0.35, 1),
+        width 0.65s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: left, width, background-position;
 }
 
-.line-pontilhada.pontilhado-esquerda::after {
-    left: 0;
+.line-pontilhada.animar::after {
+    animation-play-state: running;
+}
+
+@keyframes pontilhado-em-movimento {
+    from {
+        background-position: 18px center;
+    }
+
+    to {
+        background-position: 0 center;
+    }
 }
 
 .depoimentos {
-    padding: 100px 3vw;
+    padding: 10px 3vw;
     background-color: var(--bege-color);
 }
 
@@ -1008,13 +1325,1311 @@ p{
     color: var(--marrom-claro-color);
 }
 
-
-.p-depoimento {
+.p-depo {
     margin: 0;
     font-family: var(--font-family);
     font-size: 1.7rem;
     font-weight: 300;
     line-height: 1.3;
     color: var(--azul-escuro-color);
-    margin-left: 60px;;
+    margin-left: 60px;
+}
+
+.carrossel-depoimentos-janela {
+    --fade-depoimentos: clamp(70px, 7vw, 140px);
+
+    width: min(86vw, 1650px);
+    margin: 90px auto 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 var(--fade-depoimentos),
+        #000 calc(100% - var(--fade-depoimentos)),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 var(--fade-depoimentos),
+        #000 calc(100% - var(--fade-depoimentos)),
+        transparent 100%
+    );
+}
+
+.carrossel-depoimentos-janela.arrastando {
+    cursor: grabbing;
+}
+
+.carrossel-depoimentos {
+    --depoimentos-gap: clamp(25px, 3.25vw, 62.5px);
+    --distancia-depoimentos: 0px;
+    --largura-card-depoimento: 31%;
+    --depoimentos-animation-delay: 0s;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--largura-card-depoimento);
+    column-gap: var(--depoimentos-gap);
+    align-items: stretch;
+    width: 100%;
+    will-change: transform;
+}
+
+.carrossel-depoimentos.carrossel-depoimentos-ativo.animar {
+    animation: carrossel-depoimentos-passando 28s linear infinite;
+    animation-delay: var(--depoimentos-animation-delay);
+}
+
+.carrossel-depoimentos-janela:hover .carrossel-depoimentos,
+.carrossel-depoimentos-janela:focus-within .carrossel-depoimentos,
+.carrossel-depoimentos-janela.arrastando .carrossel-depoimentos {
+    animation-play-state: paused;
+}
+
+.depoimento {
+    display: grid;
+    grid-template-areas:
+        "estrelas"
+        "texto"
+        "persona";
+    grid-template-rows: 70px 1fr 110px;
+    row-gap: 18px;
+    min-height: 500px;
+    padding: 20px 30px 40px;
+    overflow: visible;
+
+    background-color: var(--branco-frio-color);
+    border: 2px solid var(--azul-claro-color);
+    border-radius: 18px;
+    backface-visibility: hidden;
+    will-change: opacity, transform;
+}
+
+.avaliacao-stars{
+    grid-area: estrelas;
+    width: 180px;
+    height: 55px;
+    object-fit: contain;
+    align-self: center;
+    justify-self: start;
+}
+
+.p-depoimento{
+    grid-area: texto;
+    margin: 0;
+    font-family: var(--font-family);
+    text-align: justify;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--azul-escuro-color);
+    overflow: visible;
+}
+
+.persona-depoimento{
+    grid-area: persona;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    align-self: end;
+    justify-self: start;
+}
+
+@keyframes carrossel-depoimentos-passando {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-0.2 * var(--distancia-depoimentos)));
+    }
+}
+
+.perguntas-frequentes {
+    padding: 100px 3vw 120px;
+    background-color: var(--bege-color);
+}
+
+.h1-perguntas {
+    margin: 0 0 55px 60px;
+    font-family: var(--font-family);
+    font-size: 3.7rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    color: var(--marrom-claro-color);
+}
+
+.container-perguntas {
+    display: grid;
+    gap: 18px;
+    width: min(86vw, 1400px);
+    margin: 0 auto;
+}
+
+.pergunta {
+    position: relative;
+    padding: 20px 95px 20px 20px;
+    overflow: hidden;
+
+    background-color: transparent;
+    border: 2px solid var(--marrom-claro-color);
+    border-radius: 50px;
+    cursor: pointer;
+
+    transition:
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        background-color 0.35s ease;
+}
+
+.pergunta::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 34px;
+    width: 34px;
+    height: 34px;
+
+    background-image: url("./assets/FLECHA PERGUNTAS FREQUENTES.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    transform: translateY(-50%);
+    transition: transform 0.35s ease;
+}
+
+.pergunta:hover,
+.pergunta.aberta {
+    border-color: var(--azul-medio-color);
+    box-shadow: 0 14px 30px rgba(6, 23, 58, 0.08);
+}
+
+.pergunta.aberta::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.h2-pergunta {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: clamp(1.25rem, 1.4vw, 1.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--azul-medio-color);
+}
+
+.pergunta p {
+    max-height: 0;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+
+    font-family: var(--font-family);
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--azul-escuro-color);
+
+    transition:
+        max-height 0.45s ease,
+        margin-top 0.35s ease,
+        opacity 0.35s ease;
+}
+
+.pergunta.aberta p {
+    max-height: 420px;
+    margin-top: 18px;
+    opacity: 1;
+    color: var(--marrom-claro-color);
+}
+
+/*Chamada final para o WhatsApp*/
+.chamada-wpp{
+    display: flex;
+    flex-direction: row;
+    border-radius: 35px;
+    padding: 50px 100px 100px;
+    background-color: var(--azul-claro-color);
+}
+
+.textos{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    margin-left: 3vw;
+    color: var(--text-color);
+    font-family: var(--font-family);
+}
+
+.h1-chamada{
+    margin: 0;
+    font-weight: 800;
+    font-size: 4rem;
+}
+
+.p-chamada{
+    color: var(--text-color);
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.btn-chamada{
+    font-family: var(--font-family);
+    font-size: 3.5rem;
+    font-weight: bold;
+    background-color: var(--azul-medio-color);
+    border: none;
+    color: var(--text-color);
+    padding: 5px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-top: 8vh;
+    margin-left: 5vw;
+}
+
+.btn-chamada:hover{
+    transform: scale(1.02);
+    background-color: var(--azul-escuro-color);
+    transition: 0.8s ease;
+}
+
+.btn-chamada:active{
+    transform: scale(0.98);
+    background-color: var(--azul-claro-color);
+    transition: 0.8s ease;
+    color: var(--azul-escuro-color);
+    border: 2px solid var(--azul-escuro-color);
+}
+
+/*parte do mapa*/
+.maps {
+    width: 100%;
+    padding: 80px 3vw 0;
+    background-color: var(--bege-color);
+}
+
+.end-maps {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 1.25fr);
+    align-items: stretch;
+    gap: 45px;
+    min-width: 94vw;
+    margin-top: -150px;
+    padding: 50px;
+    background: var(--branco-frio-color);
+    border-radius: 25px 25px 0 0;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 30px 25px;
+
+}
+
+.info-ctt{
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    gap: 14px;
+}
+
+.info-link {
+    color: var(--azul-medio-color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.info-link:visited {
+    color: var(--azul-medio-color);
+}
+
+.info-link:hover {
+    color: var(--azul-escuro-color);
+}
+
+.info-link:active {
+    color: var(--marrom-claro-color);
+}
+
+.img-info {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    outline: none;
+}
+
+.info-link .img-info {
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.info-link:hover .img-info {
+    filter: brightness(0) saturate(100%) invert(7%) sepia(35%) saturate(3261%) hue-rotate(213deg) brightness(92%) contrast(101%);
+    transform: scale(1.04);
+}
+
+.info-link:active .img-info {
+    filter: brightness(0) saturate(100%) invert(58%) sepia(18%) saturate(717%) hue-rotate(349deg) brightness(90%) contrast(86%);
+    transform: scale(0.98);
+}
+
+.h3-info {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--azul-medio-color);
+}
+
+.info-link .h3-info {
+    color: inherit;
+}
+
+.maps-iframe {
+    min-height: 300px;
+}
+
+.iframe-maps {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 330px;
+    border: 0;
+    border-radius: 18px 18px 0 0;
+}
+
+@media (max-width: 900px) {
+    .maps {
+        padding: 55px 3vw 0;
+    }
+
+    .end-maps {
+        grid-template-columns: 1fr;
+        width: min(90vw, 1450px);
+        padding: 32px;
+        gap: 30px;
+    }
+}
+
+/* Responsividade geral */
+html,
+body {
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--bege-color);
+}
+
+img,
+svg,
+iframe {
+    max-width: 100%;
+}
+
+@media (min-width: 1600px) {
+    .container-section,
+    .container-emocoes,
+    .sobre-mim,
+    .container-area-atuacao,
+    .carrossel,
+    .carrossel-depoimentos-janela,
+    .container-perguntas,
+    .end-maps {
+        max-width: 1700px;
+    }
+
+    .container-principal {
+        height: auto;
+        min-height: 900px;
+        background-position: center top;
+    }
+
+    .nome {
+        width: min(48vw, 900px);
+    }
+}
+
+@media (max-width: 900px) {
+    .container-principal {
+        height: auto;
+        min-height: 100svh;
+        background-position: center top;
+    }
+
+    header {
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    nav {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        width: 100%;
+    }
+
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px 22px;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    li {
+        margin-right: 0;
+        font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    }
+
+    .h1-header {
+        margin-left: 0;
+        font-size: clamp(1.8rem, 3vw, 2.3rem);
+    }
+
+    .btn-header {
+        margin-left: 0;
+        font-size: clamp(1.2rem, 2vw, 1.7rem);
+    }
+
+    .container-section {
+        gap: 30px;
+        padding: 0 3vw;
+    }
+
+    .container-apresentacao,
+    .container-informacoes,
+    .container-psico {
+        padding: clamp(24px, 4vw, 50px);
+    }
+
+    .nome {
+        width: min(64vw, 760px);
+    }
+
+    .h2-section {
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+    }
+
+    .btn-psico,
+    .btn-sobre,
+    .btn-emocoes,
+    .btn-chamada {
+        font-size: clamp(1.35rem, 3vw, 2.6rem);
+    }
+
+    .all-emocoes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .container-sobre {
+        margin-top: -80px;
+        padding: 80px 4vw;
+    }
+
+    .sobre-mim {
+        height: auto;
+        min-height: auto;
+        gap: 30px;
+    }
+
+    .img-sobre {
+        width: min(36vw, 420px);
+        margin-left: 20px;
+    }
+
+    .informacoes-sobre-mim {
+        flex: 1;
+        width: auto;
+        height: auto;
+        padding: 0 24px;
+    }
+
+    .sobre-leo {
+        margin-top: 0;
+        font-size: clamp(2.2rem, 4vw, 3.3rem);
+    }
+
+    .leonir {
+        font-size: clamp(3rem, 5vw, 4.6rem);
+    }
+
+    .texto-sobre-leo {
+        font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    }
+
+    .lista-terapias {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 55px;
+        column-gap: clamp(30px, 5vw, 70px);
+    }
+
+    .diferenciais {
+        min-height: 640px;
+    }
+
+    .acolhimento,
+    .Especializacao,
+    .Confianca {
+        width: 68%;
+    }
+
+    .img-diferenciais {
+        width: 58%;
+        opacity: 0.75;
+    }
+
+    .carrossel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: min(90vw, 1100px);
+        column-gap: clamp(28px, 5vw, 70px);
+    }
+
+    .carrossel > div {
+        height: auto;
+        min-height: 540px;
+        padding: 24px 36px 36px;
+    }
+
+    .btn-carrossel-anterior {
+        left: -55px;
+    }
+
+    .btn-carrossel-proximo {
+        right: -55px;
+    }
+
+    .carrossel-depoimentos {
+        --largura-card-depoimento: calc((100% - var(--depoimentos-gap)) / 2);
+    }
+
+    .chamada-wpp {
+        align-items: center;
+        gap: 30px;
+        padding: 50px 6vw 80px;
+    }
+
+    .h1-chamada {
+        font-size: clamp(2.4rem, 5vw, 3.6rem);
+    }
+
+    .btn-chamada {
+        margin-top: 0;
+        font-size: clamp(1.6rem, 3.8vw, 2.8rem);
+    }
+
+    .end-maps {
+        margin-top: -100px;
+    }
+}
+
+@media (max-width: 900px) {
+    header {
+        display: none;
+    }
+
+    nav {
+        display: none;
+    }
+
+    nav ul {
+        justify-content: center;
+    }
+
+    .container-section {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .container-apresentacao {
+        order: 2;
+        width: 100%;
+        text-align: left;
+    }
+
+    .container-informacoes {
+        order: 1;
+        margin-left: 0;
+        padding: 32px 24px 10px;
+        align-self: center;
+    }
+
+    .img-informacoes {
+        width: 160px;
+        height: 160px;
+    }
+
+    .container-psico {
+        align-items: flex-start;
+        width: 100%;
+        padding: 24px 8vw;
+        text-align: left;
+    }
+
+    .container-btn {
+        justify-content: center;
+        padding: 0 8vw;
+        margin-bottom: 70px;
+    }
+
+    .titulo-emocoes,
+    .p-terapeutico {
+        font-size: clamp(1.7rem, 5.4vw, 2.6rem);
+    }
+
+    .titulo-emocoes.animar .texto-digitando,
+    .p-terapeutico.animar .texto-digitando,
+    .texto-digitando {
+        clip-path: none;
+        opacity: 1;
+        white-space: normal;
+        animation: none;
+    }
+
+    .texto-digitando::after {
+        display: none;
+    }
+
+    .all-emocoes {
+        grid-template-columns: 1fr;
+        row-gap: 70px;
+        margin-top: 70px;
+    }
+
+    .emocao.aberta {
+        grid-template-columns: 70px minmax(0, 1fr);
+        min-height: auto;
+        padding: 18px 24px 34px 12px;
+    }
+
+    .emocao.aberta .img-sentidos {
+        width: 62px;
+        height: 70px;
+    }
+
+    .emocao.aberta .conteudo-extra {
+        font-size: 1.05rem;
+        line-height: 1.35;
+    }
+
+    .btn-emocoes {
+        position: static;
+        transform: none;
+        margin-top: 32px;
+    }
+
+    .btn-emocoes:hover,
+    .btn-emocoes:active {
+        transform: translateY(-2px);
+    }
+
+    .container-sobre-imagens {
+        justify-content: space-between;
+        gap: 0;
+        padding: 0 6vw;
+        margin-top: 0;
+    }
+
+    .img-sobre-imagens {
+        width: clamp(42px, 8vw, 70px);
+        height: auto;
+    }
+
+    .container-sobre {
+        margin-top: 0;
+        padding: 55px 4vw;
+    }
+
+    .sobre-mim {
+        flex-direction: column;
+        width: 94vw;
+        padding: 32px 24px;
+    }
+
+    .img-sobre {
+        display: block;
+        width: min(70vw, 360px);
+        margin: 0 auto;
+    }
+
+    .informacoes-sobre-mim {
+        align-items: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    .sobre-leo,
+    .leonir,
+    .crp,
+    .texto-sobre-leo {
+        text-align: center;
+    }
+
+    .btn-sobre {
+        align-self: center;
+    }
+
+    .abordagem-clinica {
+        grid-template-columns: clamp(42px, 8vw, 65px) minmax(0, 1fr) clamp(42px, 8vw, 65px);
+        column-gap: 12px;
+        padding: 45px 5vw 70px;
+    }
+
+    .abordagem-clinica > img {
+        display: block;
+        width: clamp(38px, 7vw, 60px);
+        height: clamp(38px, 7vw, 60px);
+        transform: none;
+    }
+
+    .p-abordagem {
+        width: 100%;
+    }
+
+    .area-atuacao {
+        padding: 55px 3vw 35px;
+    }
+
+    .container-area-atuacao {
+        width: 94vw;
+        margin: 0 auto;
+        padding: 30px 28px 0;
+        transform: none;
+    }
+
+    .lista-terapias {
+        grid-template-columns: 1fr;
+    }
+
+    .diferenciais {
+        min-height: auto;
+        padding-bottom: 32px;
+    }
+
+    .acolhimento,
+    .Especializacao,
+    .Confianca,
+    .p-diferenciais {
+        width: 100%;
+    }
+
+    .img-diferenciais {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        display: block;
+        width: min(80vw, 520px);
+        margin: 30px auto 0;
+        opacity: 1;
+    }
+
+    .processo-terapeutico {
+        padding: 70px 3vw 100px;
+    }
+
+    .carrossel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: min(90vw, 900px);
+        margin-top: 60px;
+        column-gap: 28px;
+    }
+
+    .carrossel > div {
+        min-height: 500px;
+        padding: 22px 24px 34px;
+    }
+
+    .btn-carrossel-processo {
+        width: 46px;
+        height: 46px;
+    }
+
+    .btn-carrossel-anterior {
+        left: -22px;
+    }
+
+    .btn-carrossel-proximo {
+        right: -22px;
+    }
+
+    .line-pontilhada {
+        margin-top: 70px;
+    }
+
+    .h1-depoimentos,
+    .p-depo,
+    .h1-perguntas {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .carrossel-depoimentos-janela {
+        width: min(90vw, 900px);
+        margin-top: 55px;
+    }
+
+    .depoimento {
+        min-height: 470px;
+    }
+
+    .perguntas-frequentes {
+        padding: 75px 3vw 90px;
+    }
+
+    .chamada-wpp {
+        flex-direction: column;
+        align-items: center;
+        padding: 45px 7vw 75px;
+        text-align: center;
+    }
+
+    .textos {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .btn-chamada {
+        margin-left: 0;
+    }
+
+    .end-maps {
+        min-width: 0;
+        width: min(92vw, 1450px);
+        margin-top: 0;
+    }
+
+    .info {
+        gap: 28px;
+        padding: 10px 0;
+    }
+
+    p,
+    .p-psico,
+    .p-sentidos,
+    .texto-sobre-leo,
+    .p-abordagem,
+    .p-terapias,
+    .p-diferenciais,
+    .p-processo,
+    .p-depo,
+    .p-depoimento,
+    .pergunta p,
+    .p-chamada {
+        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        line-height: 1.45;
+    }
+}
+
+@media (max-width: 700px) {
+    .container-principal {
+        min-height: auto;
+        padding-bottom: 42px;
+    }
+
+    header {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    header > .icone-psicologia:first-child {
+        width: 52px;
+        height: 52px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    li {
+        display: block;
+        font-size: 1.1rem;
+    }
+
+    .btn-header {
+        font-size: 1.2rem;
+        padding: 6px 22px;
+    }
+
+    .container-section {
+        margin-top: 10px;
+        padding: 0 5vw;
+    }
+
+    .container-apresentacao {
+        padding: 24px 0 10px;
+    }
+
+    .nome {
+        width: 88vw;
+    }
+
+    .h2-section {
+        font-size: clamp(1.35rem, 6vw, 1.9rem);
+    }
+
+    .h3-section {
+        margin-top: -10px;
+        font-size: 1.1rem;
+    }
+
+    .img-informacoes {
+        width: 120px;
+        height: 120px;
+    }
+
+    .h2-psico {
+        font-size: 1.35rem;
+    }
+
+    .p-psico,
+    p {
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+
+    .btn-psico,
+    .btn-sobre,
+    .btn-emocoes,
+    .btn-chamada,
+    .btn-diferenciais {
+        width: 100%;
+        max-width: 360px;
+        font-size: 1.45rem;
+    }
+
+    .container-sentidos {
+        padding: 0 4vw 65px;
+    }
+
+    .container-emocoes {
+        width: 100%;
+        padding: 55px 18px 65px;
+    }
+
+    .titulo-emocoes {
+        margin-top: 0;
+        font-size: clamp(1.45rem, 7vw, 2.1rem);
+        text-align: center;
+    }
+
+    .emocao {
+        grid-template-columns: 56px minmax(0, 1fr);
+        min-height: 105px;
+        padding: 12px 12px 18px 8px;
+    }
+
+    .img-sentidos {
+        width: 50px;
+        height: 50px;
+    }
+
+    .h2-sentidos {
+        font-size: 1.1rem;
+    }
+
+    .p-sentidos {
+        font-size: 0.95rem;
+    }
+
+    .emocao.aberta {
+        grid-template-columns: 1fr;
+        padding: 22px 18px 34px;
+    }
+
+    .emocao.aberta .img-sentidos {
+        grid-row: auto;
+        width: 64px;
+        height: 64px;
+        justify-self: start;
+    }
+
+    .emocao.aberta .conteudo-emocao,
+    .emocao.aberta .conteudo-extra {
+        grid-column: 1;
+        padding-left: 0;
+        border-left: none;
+    }
+
+    .emocao.aberta .h2-sentidos {
+        font-size: 1.45rem;
+    }
+
+    .container-sobre-imagens {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 7vw;
+    }
+
+    .img-sobre-imagens {
+        width: clamp(38px, 11vw, 56px);
+        height: auto;
+    }
+
+    .abordagem-clinica {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        column-gap: 8px;
+        padding: 38px 4vw 55px;
+    }
+
+    .abordagem-clinica > img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .sobre-mim {
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    .leonir {
+        font-size: clamp(2.4rem, 10vw, 3.2rem);
+    }
+
+    .sobre-leo {
+        font-size: clamp(1.9rem, 8vw, 2.6rem);
+    }
+
+    .texto-sobre-leo {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .abordagem-clinica {
+        padding: 38px 6vw 55px;
+    }
+
+    .h2-abordagem,
+    .atuacao h1,
+    .diferenciais > h1,
+    .h1-depoimentos,
+    .h1-perguntas {
+        font-size: clamp(2rem, 8vw, 2.6rem);
+        letter-spacing: 0.06em;
+    }
+
+    .container-area-atuacao {
+        width: 100%;
+        padding: 28px 18px 0;
+    }
+
+    .line {
+        width: 100%;
+        margin: 55px auto 45px;
+    }
+
+    .btn-terapias {
+        width: 100%;
+        white-space: normal;
+    }
+
+    .img-diferenciais {
+        width: 100%;
+    }
+
+    .processo-terapeutico {
+        padding: 58px 4vw 80px;
+    }
+
+    .p-terapeutico {
+        font-size: clamp(1.5rem, 7vw, 2.2rem);
+    }
+
+    .carrossel {
+        grid-template-columns: 1fr;
+        width: 88vw;
+        margin-top: 42px;
+    }
+
+    .carrossel > div {
+        min-height: auto;
+        padding: 22px 22px 32px;
+    }
+
+    .img-processo {
+        height: 140px;
+    }
+
+    .titulo-processo {
+        font-size: 1.45rem;
+    }
+
+    .btn-carrossel-anterior {
+        left: -14px;
+    }
+
+    .btn-carrossel-proximo {
+        right: -14px;
+    }
+
+    .line-pontilhada {
+        width: 88vw;
+        margin-top: 50px;
+    }
+
+    .depoimentos {
+        padding: 35px 4vw;
+    }
+
+    .p-depo {
+        font-size: 1rem;
+    }
+
+    .carrossel-depoimentos-janela {
+        --fade-depoimentos: 42px;
+        width: 90vw;
+        margin-top: 38px;
+    }
+
+    .carrossel-depoimentos {
+        --depoimentos-gap: 18px;
+        --largura-card-depoimento: 100%;
+    }
+
+    .depoimento {
+        grid-template-rows: auto auto auto;
+        min-height: auto;
+        padding: 20px 22px 28px;
+    }
+
+    .avaliacao-stars {
+        width: 140px;
+    }
+
+    .p-depoimento {
+        font-size: 0.98rem;
+        line-height: 1.35;
+        text-align: left;
+    }
+
+    .pergunta {
+        padding: 18px 58px 18px 18px;
+        border-radius: 28px;
+    }
+
+    .pergunta::after {
+        right: 18px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .h2-pergunta {
+        font-size: 1.05rem;
+    }
+
+    .pergunta p {
+        font-size: 0.98rem;
+    }
+
+    .chamada-wpp {
+        border-radius: 24px;
+        padding: 35px 6vw 55px;
+    }
+
+    .h1-chamada {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+    }
+
+    .p-chamada {
+        font-size: 1rem;
+    }
+
+    .maps {
+        padding-top: 45px;
+    }
+
+    .end-maps {
+        width: 100%;
+        padding: 24px 18px;
+        gap: 24px;
+    }
+
+    .info-ctt {
+        grid-template-columns: 32px minmax(0, 1fr);
+    }
+
+    .h3-info {
+        font-size: 1rem;
+        overflow-wrap: anywhere;
+    }
+
+    .maps-iframe,
+    .iframe-maps {
+        min-height: 280px;
+    }
+
+    p,
+    .p-psico,
+    .p-sentidos,
+    .texto-sobre-leo,
+    .p-abordagem,
+    .p-terapias,
+    .p-diferenciais,
+    .p-processo,
+    .p-depo,
+    .p-depoimento,
+    .pergunta p,
+    .p-chamada {
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-principal {
+        background-position: 58% top;
+    }
+
+    .h1-header {
+        font-size: 1.65rem;
+    }
+
+    .container-psico {
+        padding-inline: 5vw;
+    }
+
+    .container-emocoes,
+    .sobre-mim,
+    .container-area-atuacao,
+    .end-maps {
+        border-radius: 14px;
+    }
+
+    .all-emocoes {
+        row-gap: 55px;
+    }
+
+    .btn-fechar img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .emocao.aberta .btn-fechar {
+        top: -18px;
+        right: -12px;
+    }
+
+    .h2-terapias,
+    .titulo-processo {
+        font-size: 1.35rem;
+    }
+
+    .container-perguntas {
+        width: 92vw;
+    }
+
+    .pergunta.aberta p {
+        max-height: 760px;
+    }
 }
