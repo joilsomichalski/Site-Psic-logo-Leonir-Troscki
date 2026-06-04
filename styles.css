@@ -20,6 +20,7 @@
     --marrom-claro-color: #a78768;
     --text-color: #ffff;
     --font-family: 'Merriweather Sans', sans-serif;
+    --recuo-main-inicial: 50px;
 }
 
 .container-principal{
@@ -252,7 +253,7 @@ li{
 
 
 .container-apresentacao {
-    padding: 50px;
+    padding: var(--recuo-main-inicial);
     margin-top: 50px;
 }
 
@@ -272,7 +273,7 @@ li{
     align-items: flex-start;
     width: 40vw;
     height: auto;
-    padding: 50px;
+    padding: 50px var(--recuo-main-inicial);
 }
 
 .h2-psico{
@@ -294,7 +295,7 @@ li{
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 0 50px;
+    padding: 0 var(--recuo-main-inicial);
     margin-bottom: 100px;
 }
 
@@ -647,6 +648,10 @@ p{
     background-color: var(--bege-color);
 }
 
+    .container-sobre-informacoes {
+        width: 100%;
+    }
+
 .container-sobre-imagens{
     display: flex;
     justify-content: center;
@@ -789,6 +794,7 @@ p{
     cursor: pointer;
     align-self: flex-end;
     margin-top: 20px;
+    margin-bottom: 50px;
     opacity: 0;
     transform: translateY(20px);
 }
@@ -1074,11 +1080,11 @@ p{
 /* Foto presa ao canto inferior direito */
 .img-diferenciais {
     position: absolute;
-    right: -55px;
+    right: -80px;
     bottom: 0;
     z-index: 1;
 
-    width: 76%;
+    width: 90%;
     height: auto;
     object-fit: contain;
     object-position: right bottom;
@@ -1119,7 +1125,7 @@ p{
     color: var(--marrom-claro-color);
 }
 
-/* Três cards visíveis */
+/* Carrossel Processo */
 .carrossel {
     position: relative;
     display: grid;
@@ -1737,7 +1743,7 @@ iframe {
     max-width: 100%;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1800px) and (max-width: 2495px) {
     .container-section,
     .container-emocoes,
     .sobre-mim,
@@ -1760,7 +1766,559 @@ iframe {
     }
 }
 
+@media (min-width: 2496px) {
+    :root {
+        --recuo-main-inicial: 80px;
+    }
+
+    header {
+        padding: 32px clamp(70px, 4vw, 120px);
+    }
+
+    .icone-psicologia {
+        width: 82px;
+        height: 82px;
+    }
+
+    nav {
+        grid-template-columns: minmax(360px, 0.8fr) minmax(0, 2fr);
+        column-gap: clamp(80px, 5vw, 150px);
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: clamp(42px, 2.8vw, 84px);
+    }
+
+    .h1-header {
+        margin-left: 0;
+        font-size: 3.2rem;
+        white-space: nowrap;
+    }
+
+    li {
+        margin-right: 0;
+        font-size: 2.2rem;
+        white-space: nowrap;
+    }
+
+    .btn-header {
+        margin-left: 0;
+        font-size: 2.6rem;
+        padding: 7px 42px;
+        white-space: nowrap;
+    }
+
+    .container-principal {
+        height: auto;
+        min-height: 1050px;
+        background-position: center top;
+    }
+
+    .container-section,
+    .container-emocoes,
+    .sobre-mim,
+    .container-area-atuacao,
+    .carrossel,
+    .carrossel-depoimentos-janela,
+    .container-perguntas,
+    .end-maps {
+        max-width: 2200px;
+    }
+
+    .container-section {
+        margin-inline: auto;
+    }
+
+    .nome {
+        width: min(42vw, 1050px);
+    }
+
+    .h2-section {
+        font-size: 3.2rem;
+    }
+
+    .h3-section {
+        font-size: 2rem;
+    }
+
+    .container-psico {
+        width: min(36vw, 880px);
+        margin-left: max(0px, calc((100vw - 2200px) / 2));
+    }
+
+    .container-btn {
+        margin-left: max(0px, calc((100vw - 2200px) / 2));
+    }
+
+    .h2-psico {
+        font-size: 2.4rem;
+    }
+
+    .p-psico,
+    .p-terapias,
+    .p-diferenciais,
+    .p-processo,
+    .p-depoimento,
+    .pergunta p,
+    .p-chamada {
+        font-size: 1.45rem;
+        line-height: 1.45;
+    }
+
+    .btn-psico,
+    .btn-sobre,
+    .btn-diferenciais,
+    .btn-chamada {
+        font-size: 3.2rem;
+    }
+
+    .btn-sobre {
+        margin-top: 38px;
+    }
+
+    .container-emocoes {
+        padding: 170px 120px 240px;
+    }
+
+    .titulo-emocoes,
+    .p-terapeutico {
+        font-size: 4rem;
+    }
+
+    .all-emocoes {
+        column-gap: 90px;
+        row-gap: 130px;
+    }
+
+    .h2-sentidos {
+        font-size: 1.7rem;
+    }
+
+    .p-sentidos {
+        font-size: 1.3rem;
+    }
+
+    .sobre-mim {
+        height: min(82vh, 900px);
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .img-sobre {
+        width: min(35vw, 750px);
+    }
+
+    .sobre-leo {
+        font-size: 3.9rem;
+    }
+
+    .leonir {
+        font-size: 5.5rem;
+    }
+
+    .texto-sobre-leo {
+        font-size: 1.45rem;
+        line-height: 1.45;
+    }
+
+    .h2-abordagem,
+    .atuacao h1,
+    .h1-depoimentos,
+    .h1-perguntas {
+        font-size: 4.5rem;
+    }
+
+    .p-abordagem {
+        font-size: 1.75rem;
+    }
+
+    .lista-terapias {
+        column-gap: clamp(90px, 7vw, 180px);
+    }
+
+    .h2-terapias,
+    .titulo-processo {
+        font-size: 2.45rem;
+    }
+
+    .carrossel > div {
+        min-height: 680px;
+        padding: 34px 80px 54px;
+    }
+
+    .depoimento {
+        min-height: 620px;
+        padding: 28px 42px 48px;
+    }
+
+    .chamada-wpp {
+        align-items: center;
+        justify-content: center;
+        gap: 120px;
+        padding: 70px 140px 120px;
+    }
+
+    .h1-chamada {
+        font-size: 5rem;
+    }
+
+    .btn-chamada {
+        align-self: center;
+        margin-top: 0;
+        margin-left: 0;
+        white-space: nowrap;
+    }
+
+    .h3-info {
+        font-size: 1.8rem;
+    }
+
+    .maps-iframe,
+    .iframe-maps {
+        min-height: 430px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1799px) {
+    header {
+        gap: clamp(18px, 2vw, 34px);
+        padding: 18px clamp(24px, 2.4vw, 42px);
+    }
+
+    nav {
+        flex: 1;
+        grid-template-columns: minmax(220px, 0.85fr) minmax(0, 2fr);
+        align-items: center;
+        column-gap: clamp(24px, 3vw, 60px);
+    }
+
+    nav ul {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: clamp(18px, 1.8vw, 34px);
+    }
+
+    .h1-header {
+        margin-left: 0;
+        font-size: clamp(2rem, 2.2vw, 2.45rem);
+        white-space: nowrap;
+    }
+
+    li {
+        margin-right: 0;
+        font-size: clamp(1.3rem, 1.35vw, 1.65rem);
+        white-space: nowrap;
+    }
+
+    .btn-header {
+        margin-left: 0;
+        padding: 5px clamp(20px, 1.8vw, 30px);
+        font-size: clamp(1.5rem, 1.55vw, 2rem);
+        white-space: nowrap;
+    }
+
+    .icone-psicologia {
+        flex: 0 0 auto;
+    }
+
+    .chamada-wpp {
+        align-items: center;
+        gap: clamp(36px, 4vw, 80px);
+        padding: 50px clamp(60px, 6vw, 100px) 90px;
+    }
+
+    .btn-chamada {
+        align-self: center;
+        margin-top: 0;
+        margin-left: 0;
+        font-size: clamp(2.2rem, 2.6vw, 3rem);
+        white-space: nowrap;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+    .container-section {
+        margin-top: 32px;
+    }
+
+    .container-apresentacao {
+        padding: 38px;
+        margin-top: 32px;
+    }
+
+    .nome {
+        width: min(48vw, 680px);
+    }
+
+    .h2-section {
+        font-size: 2.15rem;
+    }
+
+    .h3-section {
+        margin-top: -16px;
+        font-size: 1.3rem;
+    }
+
+    .container-informacoes {
+        padding: 38px;
+    }
+
+    .img-informacoes {
+        width: 210px;
+        height: 210px;
+    }
+
+    .container-psico {
+        width: 44vw;
+        padding: 36px 38px;
+    }
+
+    .h2-psico {
+        font-size: 1.55rem;
+    }
+
+    .p-psico {
+        font-size: 1.05rem;
+        line-height: 1.35;
+    }
+
+    .container-btn {
+        padding: 0 38px;
+        margin-bottom: 75px;
+    }
+
+    .btn-psico {
+        font-size: 2.45rem;
+        padding: 3px 14px;
+    }
+
+    .container-sentidos {
+        padding: 0 3vw 80px;
+    }
+
+    .container-emocoes {
+        width: 91vw;
+        padding: 95px 60px 150px;
+    }
+
+    .titulo-emocoes {
+        margin-top: -34px;
+        font-size: 2.6rem;
+    }
+
+    .all-emocoes {
+        column-gap: 36px;
+        row-gap: 72px;
+        margin-top: 72px;
+    }
+
+    .emocao {
+        grid-template-columns: 66px minmax(0, 1fr);
+        min-height: 100px;
+        padding: 10px 12px 10px 6px;
+    }
+
+    .img-sentidos {
+        width: 58px;
+        height: 58px;
+    }
+
+    .conteudo-emocao {
+        padding-left: 12px;
+    }
+
+    .h2-sentidos {
+        font-size: 1.18rem;
+    }
+
+    .p-sentidos {
+        font-size: 1rem;
+        line-height: 1.12;
+    }
+
+    .btn-emocoes {
+        bottom: -30px;
+        font-size: 2.45rem;
+    }
+
+    .emocao.aberta {
+        grid-template-columns: 86px minmax(0, 1fr);
+        min-height: 330px;
+        padding: 16px 90px 34px 10px;
+    }
+
+    .emocao.aberta .img-sentidos {
+        width: 70px;
+        height: 80px;
+    }
+
+    .emocao.aberta .h2-sentidos {
+        font-size: 1.75rem;
+    }
+
+    .emocao.aberta .conteudo-extra {
+        font-size: 1.15rem;
+        line-height: 1.25;
+    }
+
+    .sobre-mim {
+        height: 82vh;
+        min-height: 0;
+    }
+
+    .sobre-leo {
+        font-size: 2.7rem;
+    }
+
+    .leonir {
+        font-size: 4.4rem;
+    }
+
+    .crp {
+        font-size: 1.35rem;
+    }
+
+    .texto-sobre-leo {
+        font-size: 1.1rem;
+        line-height: 1.35;
+    }
+
+    .btn-sobre {
+        font-size: 2.55rem;
+    }
+
+    .p-terapias,
+    .p-diferenciais {
+        font-size: 1.05rem;
+        line-height: 1.3;
+    }
+
+    .carrossel > div,
+    .carrossel > div.card-processo-visivel {
+        height: 520px;
+        padding: 22px 42px 34px;
+    }
+
+    .titulo-processo {
+        font-size: 1.75rem;
+    }
+
+    .h1-depoimentos {
+        font-size: 3.1rem;
+    }
+
+    .p-depo {
+        font-size: 1.35rem;
+        line-height: 1.25;
+    }
+
+    .carrossel-depoimentos-janela {
+        margin-top: 70px;
+    }
+
+    .carrossel-depoimentos {
+        --depoimentos-gap: clamp(18px, 2.5vw, 42px);
+    }
+
+    .depoimento {
+        grid-template-rows: 58px 1fr 90px;
+        row-gap: 14px;
+        min-height: 440px;
+        padding: 18px 24px 32px;
+    }
+
+    .avaliacao-stars {
+        width: 150px;
+        height: 46px;
+    }
+
+    .p-depoimento {
+        font-size: 1.05rem;
+        line-height: 1.18;
+    }
+
+    .persona-depoimento {
+        width: 68px;
+        height: 68px;
+    }
+
+    .chamada-wpp {
+        align-items: center;
+        gap: 48px;
+        padding: 42px 70px 72px;
+    }
+
+    .textos {
+        width: 54vw;
+        margin-left: 0;
+    }
+
+    .h1-chamada {
+        font-size: 3.25rem;
+        line-height: 1.05;
+    }
+
+    .p-chamada {
+        font-size: 1.25rem;
+        line-height: 1.35;
+    }
+
+    .btn-chamada {
+        align-self: center;
+        margin-top: 0;
+        margin-left: 0;
+        font-size: 2.65rem;
+        white-space: nowrap;
+    }
+
+    .maps {
+        padding-top: 64px;
+    }
+
+    .end-maps {
+        gap: 34px;
+        min-width: 90vw;
+        margin-top: -95px;
+        padding: 38px;
+    }
+
+    .info {
+        gap: 42px;
+        padding: 22px 18px;
+    }
+
+    .info-ctt {
+        grid-template-columns: 34px 1fr;
+        gap: 12px;
+    }
+
+    .img-info {
+        width: 28px;
+        height: 28px;
+    }
+
+    .h3-info {
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+
+    .maps-iframe,
+    .iframe-maps {
+        min-height: 285px;
+    }
+}
+
 @media (max-width: 900px) {
+    :root {
+        --recuo-main-inicial: 8vw;
+    }
+
     .container-principal {
         height: auto;
         min-height: 100svh;
@@ -1806,9 +2364,7 @@ iframe {
         padding: 0 3vw;
     }
 
-    .container-apresentacao,
-    .container-informacoes,
-    .container-psico {
+    .container-informacoes {
         padding: clamp(24px, 4vw, 50px);
     }
 
@@ -1956,6 +2512,8 @@ iframe {
         order: 2;
         width: 100%;
         text-align: left;
+        padding-left: 8vw;
+        padding-right: 8vw;
     }
 
     .container-informacoes {
@@ -2039,6 +2597,11 @@ iframe {
         gap: 0;
         padding: 0 6vw;
         margin-top: 0;
+    }
+
+    .container-sobre-informacoes {
+        width: 100%;
+        padding: 0 6vw;
     }
 
     .img-sobre-imagens {
@@ -2268,7 +2831,7 @@ iframe {
     }
 
     .container-apresentacao {
-        padding: 24px 0 10px;
+        padding: 24px 5vw 10px;
     }
 
     .nome {
