@@ -1746,21 +1746,21 @@ iframe {
 
 @media (min-width: 1800px) and (max-width: 1999px) and (min-height: 1000px) and (max-height: 1120px) {
     :root {
-        --recuo-main-inicial: 46px;
+        --recuo-main-inicial: 40px;
     }
 
     header {
-        padding: 18px 34px;
+        padding: 14px 30px;
     }
 
     .icone-psicologia {
-        width: 58px;
-        height: 58px;
+        width: 52px;
+        height: 52px;
     }
 
     nav {
         grid-template-columns: minmax(260px, 0.8fr) minmax(0, 2fr);
-        column-gap: 46px;
+        column-gap: 38px;
         align-items: center;
     }
 
@@ -1768,31 +1768,31 @@ iframe {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        gap: 30px;
+        gap: 24px;
     }
 
     .h1-header {
         margin-left: 0;
-        font-size: 2.35rem;
+        font-size: 2.1rem;
         white-space: nowrap;
     }
 
     li {
         margin-right: 0;
-        font-size: 1.65rem;
+        font-size: 1.48rem;
         white-space: nowrap;
     }
 
     .btn-header {
         margin-left: 0;
-        font-size: 2rem;
-        padding: 5px 28px;
+        font-size: 1.78rem;
+        padding: 4px 24px;
         white-space: nowrap;
     }
 
     .container-principal {
-        height: auto;
-        min-height: 960px;
+        height: 100svh;
+        min-height: 0;
         background-position: center top;
     }
 
@@ -1807,200 +1807,214 @@ iframe {
     }
 
     .container-section {
-        margin-top: 36px;
+        margin-top: 18px;
         margin-inline: auto;
     }
 
     .container-apresentacao {
-        padding: 46px;
-        margin-top: 34px;
+        padding: 34px 40px;
+        margin-top: 20px;
     }
 
     .nome {
-        width: min(45vw, 820px);
+        width: min(42vw, 760px);
     }
 
     .h2-section {
-        font-size: 2.35rem;
+        font-size: 2.05rem;
     }
 
     .h3-section {
-        margin-top: -18px;
-        font-size: 1.42rem;
+        margin-top: -14px;
+        font-size: 1.22rem;
     }
 
     .container-informacoes {
-        padding: 42px;
+        padding: 32px 40px;
     }
 
     .img-informacoes {
-        width: 235px;
-        height: 235px;
+        width: 210px;
+        height: 210px;
     }
 
     .container-psico {
-        width: 39vw;
-        padding: 38px var(--recuo-main-inicial);
+        width: 44vw;
+        padding: 26px var(--recuo-main-inicial);
     }
 
     .h2-psico {
-        font-size: 1.7rem;
+        font-size: 1.48rem;
     }
 
     .p-psico {
-        font-size: 1.12rem;
-        line-height: 1.35;
+        font-size: 1rem;
+        line-height: 1.28;
     }
 
     .container-btn {
         padding: 0 var(--recuo-main-inicial);
-        margin-bottom: 80px;
+        margin-bottom: 48px;
     }
 
     .btn-psico {
-        font-size: 2.75rem;
+        font-size: 2.35rem;
     }
 
     .container-sentidos {
-        padding: 0 3vw 90px;
+        padding: 0 3vw 78px;
     }
 
     .container-emocoes {
         width: 92vw;
-        padding: 105px 70px 170px;
+        padding: 86px 58px 138px;
     }
 
     .titulo-emocoes,
     .p-terapeutico {
-        font-size: 2.85rem;
+        font-size: 2.52rem;
     }
 
     .titulo-emocoes {
-        margin-top: -38px;
+        margin-top: -28px;
     }
 
     .all-emocoes {
-        column-gap: 44px;
-        row-gap: 84px;
-        margin-top: 84px;
+        column-gap: 36px;
+        row-gap: 68px;
+        margin-top: 68px;
     }
 
     .emocao {
-        grid-template-columns: 70px minmax(0, 1fr);
-        min-height: 108px;
+        grid-template-columns: 64px minmax(0, 1fr);
+        min-height: 96px;
         padding: 10px 12px 10px 7px;
     }
 
     .img-sentidos {
-        width: 62px;
-        height: 62px;
+        width: 56px;
+        height: 56px;
     }
 
     .h2-sentidos {
-        font-size: 1.28rem;
+        font-size: 1.16rem;
     }
 
     .p-sentidos {
-        font-size: 1.05rem;
-        line-height: 1.14;
+        font-size: 0.96rem;
+        line-height: 1.12;
     }
 
     .btn-emocoes {
-        font-size: 2.75rem;
+        font-size: 2.35rem;
     }
 
     .emocao.aberta {
-        grid-template-columns: 90px minmax(0, 1fr);
-        min-height: 360px;
-        padding: 16px 95px 36px 10px;
+        grid-template-columns: 80px minmax(0, 1fr);
+        min-height: 320px;
+        padding: 14px 82px 32px 10px;
     }
 
     .emocao.aberta .img-sentidos {
-        width: 74px;
-        height: 84px;
+        width: 66px;
+        height: 76px;
     }
 
     .emocao.aberta .h2-sentidos {
-        font-size: 1.85rem;
+        font-size: 1.62rem;
     }
 
     .emocao.aberta .conteudo-extra {
-        font-size: 1.2rem;
-        line-height: 1.25;
+        font-size: 1.05rem;
+        line-height: 1.24;
     }
 
     .container-sobre {
-        margin-top: -120px;
-        padding: 90px;
+        margin-top: -96px;
+        padding: 70px 74px 76px;
     }
 
     .sobre-mim {
-        height: min(80vh, 780px);
+        width: min(90vw, 1680px);
+        height: min(68vh, 680px);
         min-height: 0;
         overflow: visible;
     }
 
+    .container-sobre-informacoes {
+        flex: 0 0 42%;
+        width: auto;
+    }
+
+    .informacoes-sobre-mim {
+        flex: 1;
+        width: auto;
+        height: auto;
+        padding: 0 44px 0 18px;
+    }
+
     .img-sobre {
-        width: min(32vw, 595px);
-        margin-left: 55px;
+        width: min(29vw, 520px);
+        margin-left: 48px;
     }
 
     .sobre-leo {
-        margin-top: 20px;
-        font-size: 3rem;
+        margin-top: 0;
+        font-size: 2.62rem;
     }
 
     .leonir {
-        font-size: 4.9rem;
+        font-size: 4.25rem;
     }
 
     .crp {
-        font-size: 1.35rem;
+        font-size: 1.15rem;
     }
 
     .texto-sobre-leo {
-        font-size: 1.15rem;
-        line-height: 1.35;
+        font-size: 1rem;
+        line-height: 1.27;
     }
 
     .btn-sobre {
-        margin-top: 28px;
-        font-size: 2.7rem;
+        margin-top: 20px;
+        margin-bottom: 34px;
+        font-size: 2.35rem;
     }
 
     .abordagem-clinica {
-        grid-template-columns: 70px minmax(0, 1fr) 70px;
-        padding: 18px 15px 92px;
+        grid-template-columns: 62px minmax(0, 1fr) 62px;
+        padding: 16px 15px 76px;
     }
 
     .abordagem-clinica > img {
-        width: 58px;
-        height: 58px;
+        width: 52px;
+        height: 52px;
     }
 
     .h2-abordagem,
     .atuacao h1,
     .h1-depoimentos,
     .h1-perguntas {
-        font-size: 3.25rem;
+        font-size: 2.85rem;
     }
 
     .p-abordagem {
-        font-size: 1.22rem;
-        line-height: 1.28;
+        font-size: 1.08rem;
+        line-height: 1.25;
     }
 
     .container-area-atuacao {
-        padding: 18px 58px 0;
+        padding: 16px 52px 0;
     }
 
     .lista-terapias {
-        column-gap: clamp(48px, 6vw, 115px);
+        column-gap: clamp(42px, 5vw, 92px);
     }
 
     .h2-terapias,
     .titulo-processo {
-        font-size: 1.82rem;
+        font-size: 1.58rem;
     }
 
     .p-terapias,
@@ -2009,138 +2023,139 @@ iframe {
     .p-depoimento,
     .pergunta p,
     .p-chamada {
-        font-size: 1.1rem;
-        line-height: 1.3;
+        font-size: 0.98rem;
+        line-height: 1.25;
     }
 
     .diferenciais {
-        min-height: 670px;
-        padding-bottom: 55px;
+        min-height: 590px;
+        padding-bottom: 44px;
     }
 
     .diferenciais > h1 {
-        font-size: 2.75rem;
+        font-size: 2.42rem;
     }
 
     .acolhimento h2,
     .Especializacao h2,
     .Confianca h2 {
-        font-size: 1.55rem;
+        font-size: 1.34rem;
     }
 
     .acolhimento p,
     .Especializacao p,
     .Confianca p {
-        font-size: 1.08rem;
+        font-size: 0.96rem;
+        line-height: 1.22;
     }
 
     .btn-diferenciais {
-        margin-top: 38px;
-        font-size: 1.75rem;
+        margin-top: 30px;
+        font-size: 1.52rem;
     }
 
     .img-diferenciais {
-        width: 82%;
+        width: 76%;
     }
 
     .processo-terapeutico {
-        padding: 85px 3vw 125px;
+        padding: 72px 3vw 104px;
     }
 
     .carrossel {
         width: min(86vw, 1500px);
-        margin-top: 78px;
-        column-gap: clamp(44px, 5vw, 95px);
+        margin-top: 62px;
+        column-gap: clamp(36px, 4.4vw, 82px);
     }
 
     .carrossel > div,
     .carrossel > div.card-processo-visivel {
-        height: 540px;
-        padding: 24px 50px 36px;
+        height: 490px;
+        padding: 20px 38px 30px;
     }
 
     .img-processo {
-        width: 56%;
+        width: 50%;
     }
 
     .btn-carrossel-processo {
-        width: 56px;
-        height: 56px;
+        width: 50px;
+        height: 50px;
     }
 
     .btn-carrossel-anterior {
-        left: -68px;
+        left: -58px;
     }
 
     .btn-carrossel-proximo {
-        right: -68px;
+        right: -58px;
     }
 
     .line-pontilhada {
         width: min(86vw, 1500px);
-        margin-top: 88px;
+        margin-top: 70px;
     }
 
     .depoimentos {
-        padding-top: 80px;
+        padding-top: 68px;
     }
 
     .p-depo {
-        font-size: 1.45rem;
-        line-height: 1.25;
+        font-size: 1.22rem;
+        line-height: 1.24;
     }
 
     .carrossel-depoimentos-janela {
-        margin-top: 78px;
+        margin-top: 62px;
     }
 
     .carrossel-depoimentos {
-        --depoimentos-gap: clamp(22px, 2.7vw, 48px);
+        --depoimentos-gap: clamp(18px, 2.2vw, 40px);
         --largura-card-depoimento: 30%;
     }
 
     .depoimento {
-        grid-template-rows: 62px 1fr 96px;
-        row-gap: 15px;
-        min-height: 465px;
-        padding: 20px 26px 34px;
+        grid-template-rows: 54px 1fr 82px;
+        row-gap: 12px;
+        min-height: 410px;
+        padding: 18px 22px 28px;
     }
 
     .avaliacao-stars {
-        width: 160px;
-        height: 50px;
+        width: 142px;
+        height: 44px;
     }
 
     .persona-depoimento {
-        width: 72px;
-        height: 72px;
+        width: 62px;
+        height: 62px;
     }
 
     .perguntas-frequentes {
-        padding: 90px 3vw 105px;
+        padding: 74px 3vw 88px;
     }
 
     .h1-perguntas {
-        margin-bottom: 46px;
+        margin-bottom: 36px;
     }
 
     .container-perguntas {
         width: min(86vw, 1500px);
-        gap: 22px;
+        gap: 18px;
     }
 
     .pergunta {
-        padding: 18px 86px 18px 20px;
+        padding: 16px 78px 16px 18px;
     }
 
     .h2-pergunta {
-        font-size: 1.35rem;
+        font-size: 1.2rem;
     }
 
     .chamada-wpp {
         align-items: center;
-        gap: 70px;
-        padding: 46px 90px 86px;
+        gap: 54px;
+        padding: 38px 78px 70px;
     }
 
     .textos {
@@ -2149,7 +2164,7 @@ iframe {
     }
 
     .h1-chamada {
-        font-size: 3.55rem;
+        font-size: 3.05rem;
         line-height: 1.05;
     }
 
@@ -2157,46 +2172,46 @@ iframe {
         align-self: center;
         margin-top: 0;
         margin-left: 0;
-        font-size: 2.95rem;
+        font-size: 2.48rem;
         white-space: nowrap;
     }
 
     .maps {
-        padding-top: 68px;
+        padding-top: 58px;
     }
 
     .end-maps {
         grid-template-columns: minmax(0, 1fr) minmax(300px, 1.2fr);
-        gap: 38px;
+        gap: 32px;
         width: min(90vw, 1680px);
         min-width: 0;
-        margin: -110px auto 0;
-        padding: 42px;
+        margin: -92px auto 0;
+        padding: 36px;
     }
 
     .info {
-        gap: 46px;
-        padding: 24px 20px;
+        gap: 38px;
+        padding: 20px 16px;
     }
 
     .info-ctt {
-        grid-template-columns: 36px 1fr;
+        grid-template-columns: 32px 1fr;
         gap: 12px;
     }
 
     .img-info {
-        width: 30px;
-        height: 30px;
+        width: 27px;
+        height: 27px;
     }
 
     .h3-info {
-        font-size: 1.32rem;
-        line-height: 1.3;
+        font-size: 1.16rem;
+        line-height: 1.28;
     }
 
     .maps-iframe,
     .iframe-maps {
-        min-height: 300px;
+        min-height: 280px;
     }
 }
 
@@ -2745,6 +2760,505 @@ iframe {
     .maps-iframe,
     .iframe-maps {
         min-height: 285px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) and (max-height: 900px) {
+    :root {
+        --recuo-main-inicial: 32px;
+    }
+
+    header {
+        margin-top: 4px;
+        padding: 10px 24px;
+    }
+
+    .icone-psicologia {
+        width: 46px;
+        height: 46px;
+    }
+
+    nav {
+        grid-template-columns: minmax(190px, 0.78fr) minmax(0, 2fr);
+        column-gap: 22px;
+    }
+
+    nav ul {
+        gap: 18px;
+    }
+
+    .h1-header {
+        font-size: 1.85rem;
+    }
+
+    li {
+        font-size: 1.25rem;
+    }
+
+    .btn-header {
+        padding: 4px 20px;
+        font-size: 1.45rem;
+    }
+
+    .container-principal {
+        height: auto;
+        min-height: 100svh;
+        background-position: center top;
+    }
+
+    .container-section {
+        margin-top: 12px;
+        gap: 24px;
+    }
+
+    .container-apresentacao {
+        padding: 24px 32px;
+        margin-top: 12px;
+    }
+
+    .nome {
+        width: min(45vw, 590px);
+        margin-bottom: 14px;
+    }
+
+    .h2-section {
+        font-size: 1.78rem;
+    }
+
+    .h3-section {
+        margin-top: -12px;
+        font-size: 1.08rem;
+    }
+
+    .container-informacoes {
+        padding: 24px 32px;
+    }
+
+    .img-informacoes {
+        width: 170px;
+        height: 170px;
+    }
+
+    .container-psico {
+        width: 48vw;
+        padding: 18px var(--recuo-main-inicial);
+    }
+
+    .h2-psico {
+        font-size: 1.28rem;
+    }
+
+    .p-psico {
+        margin-top: 6px;
+        font-size: 0.92rem;
+        line-height: 1.24;
+    }
+
+    .container-btn {
+        padding: 0 var(--recuo-main-inicial);
+        margin-bottom: 38px;
+    }
+
+    .btn-psico {
+        font-size: 2rem;
+    }
+
+    .container-sentidos {
+        padding: 0 3vw 62px;
+    }
+
+    .container-emocoes {
+        width: 92vw;
+        padding: 70px 44px 115px;
+    }
+
+    .titulo-emocoes,
+    .p-terapeutico {
+        font-size: 2.2rem;
+    }
+
+    .titulo-emocoes {
+        margin-top: -24px;
+    }
+
+    .all-emocoes {
+        column-gap: 28px;
+        row-gap: 50px;
+        margin-top: 50px;
+    }
+
+    .emocao {
+        grid-template-columns: 56px minmax(0, 1fr);
+        min-height: 86px;
+        padding: 8px 10px 8px 6px;
+    }
+
+    .img-sentidos {
+        width: 48px;
+        height: 48px;
+    }
+
+    .conteudo-emocao {
+        padding-left: 10px;
+    }
+
+    .h2-sentidos {
+        font-size: 1rem;
+    }
+
+    .p-sentidos {
+        font-size: 0.86rem;
+        line-height: 1.12;
+    }
+
+    .btn-saiba-mais {
+        bottom: -13px;
+        font-size: 0.68rem;
+    }
+
+    .btn-emocoes {
+        bottom: -27px;
+        font-size: 2rem;
+    }
+
+    .emocao.aberta {
+        grid-template-columns: 72px minmax(0, 1fr);
+        min-height: 280px;
+        padding: 12px 70px 28px 8px;
+    }
+
+    .emocao.aberta .img-sentidos {
+        width: 60px;
+        height: 68px;
+    }
+
+    .emocao.aberta .h2-sentidos {
+        font-size: 1.45rem;
+    }
+
+    .emocao.aberta .conteudo-extra {
+        font-size: 0.95rem;
+        line-height: 1.22;
+    }
+
+    .container-sobre {
+        margin-top: -55px;
+        padding: 52px 4vw 58px;
+    }
+
+    .sobre-mim {
+        width: 92vw;
+        height: min(76vh, 610px);
+        min-height: 0;
+        gap: 22px;
+        overflow: visible;
+    }
+
+    .container-sobre-informacoes {
+        flex: 0 0 38%;
+        width: auto;
+    }
+
+    .informacoes-sobre-mim {
+        flex: 1;
+        width: auto;
+        height: auto;
+        padding: 0 34px 0 12px;
+    }
+
+    .img-sobre {
+        width: min(28vw, 380px);
+        margin-left: 34px;
+    }
+
+    .sobre-leo {
+        margin-top: 0;
+        font-size: 2.15rem;
+    }
+
+    .leonir {
+        font-size: 3.45rem;
+    }
+
+    .crp {
+        margin-top: -12px;
+        font-size: 1rem;
+    }
+
+    .texto-sobre-leo {
+        margin-top: 14px;
+        font-size: 0.88rem;
+        line-height: 1.22;
+    }
+
+    .btn-sobre {
+        margin-top: 14px;
+        margin-bottom: 26px;
+        font-size: 2rem;
+    }
+
+    .abordagem-clinica {
+        grid-template-columns: 52px minmax(0, 1fr) 52px;
+        padding: 14px 12px 66px;
+    }
+
+    .abordagem-clinica > img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .h2-abordagem,
+    .atuacao h1,
+    .h1-depoimentos,
+    .h1-perguntas {
+        font-size: 2.45rem;
+    }
+
+    .p-abordagem {
+        width: 82%;
+        font-size: 0.98rem;
+        line-height: 1.22;
+    }
+
+    .container-area-atuacao {
+        padding: 14px 42px 0;
+    }
+
+    .lista-terapias {
+        column-gap: 38px;
+    }
+
+    .h2-terapias,
+    .titulo-processo {
+        font-size: 1.35rem;
+    }
+
+    .p-terapias,
+    .p-diferenciais,
+    .p-processo,
+    .p-depoimento,
+    .pergunta p,
+    .p-chamada {
+        font-size: 0.9rem;
+        line-height: 1.22;
+    }
+
+    .btn-terapias {
+        font-size: 1.1rem;
+    }
+
+    .line {
+        margin: 65px auto 48px;
+    }
+
+    .diferenciais {
+        min-height: 500px;
+        padding-bottom: 36px;
+    }
+
+    .diferenciais > h1 {
+        font-size: 2.15rem;
+    }
+
+    .acolhimento,
+    .Especializacao,
+    .Confianca {
+        width: 62%;
+        margin-bottom: 14px;
+    }
+
+    .acolhimento h2,
+    .Especializacao h2,
+    .Confianca h2 {
+        font-size: 1.18rem;
+    }
+
+    .acolhimento p,
+    .Especializacao p,
+    .Confianca p {
+        font-size: 0.88rem;
+        line-height: 1.18;
+    }
+
+    .btn-diferenciais {
+        margin-top: 22px;
+        padding: 8px 34px;
+        font-size: 1.35rem;
+    }
+
+    .img-diferenciais {
+        width: 72%;
+    }
+
+    .processo-terapeutico {
+        padding: 62px 3vw 88px;
+    }
+
+    .carrossel {
+        width: min(88vw, 1220px);
+        margin-top: 50px;
+        column-gap: 34px;
+    }
+
+    .carrossel > div,
+    .carrossel > div.card-processo-visivel {
+        height: 430px;
+        padding: 18px 30px 26px;
+    }
+
+    .img-processo {
+        width: 48%;
+    }
+
+    .img-carrossel-processo {
+        height: 140px;
+        margin-bottom: 14px;
+    }
+
+    .btn-carrossel-processo {
+        width: 44px;
+        height: 44px;
+    }
+
+    .btn-carrossel-anterior {
+        left: -50px;
+    }
+
+    .btn-carrossel-proximo {
+        right: -50px;
+    }
+
+    .line-pontilhada {
+        width: min(88vw, 1220px);
+        margin-top: 58px;
+    }
+
+    .depoimentos {
+        padding-top: 58px;
+    }
+
+    .p-depo {
+        font-size: 1.08rem;
+        line-height: 1.22;
+    }
+
+    .carrossel-depoimentos-janela {
+        margin-top: 52px;
+    }
+
+    .carrossel-depoimentos {
+        --depoimentos-gap: 24px;
+        --largura-card-depoimento: 30%;
+    }
+
+    .depoimento {
+        grid-template-rows: 48px 1fr 72px;
+        row-gap: 10px;
+        min-height: 360px;
+        padding: 16px 18px 24px;
+    }
+
+    .avaliacao-stars {
+        width: 126px;
+        height: 38px;
+    }
+
+    .persona-depoimento {
+        width: 56px;
+        height: 56px;
+    }
+
+    .perguntas-frequentes {
+        padding: 64px 3vw 78px;
+    }
+
+    .h1-perguntas {
+        margin-bottom: 32px;
+    }
+
+    .container-perguntas {
+        width: min(88vw, 1220px);
+        gap: 16px;
+    }
+
+    .pergunta {
+        padding: 14px 70px 14px 18px;
+    }
+
+    .pergunta::after {
+        right: 28px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .h2-pergunta {
+        font-size: 1.08rem;
+    }
+
+    .chamada-wpp {
+        align-items: center;
+        gap: 40px;
+        padding: 34px 56px 58px;
+    }
+
+    .textos {
+        width: 54vw;
+        margin-left: 0;
+    }
+
+    .h1-chamada {
+        font-size: 2.5rem;
+        line-height: 1.04;
+    }
+
+    .p-chamada {
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+
+    .btn-chamada {
+        align-self: center;
+        margin-top: 0;
+        margin-left: 0;
+        font-size: 2.1rem;
+        white-space: nowrap;
+    }
+
+    .maps {
+        padding-top: 50px;
+    }
+
+    .end-maps {
+        grid-template-columns: minmax(0, 1fr) minmax(290px, 1.18fr);
+        gap: 28px;
+        min-width: 88vw;
+        margin-top: -75px;
+        padding: 30px;
+    }
+
+    .info {
+        gap: 30px;
+        padding: 16px 12px;
+    }
+
+    .info-ctt {
+        grid-template-columns: 30px 1fr;
+        gap: 10px;
+    }
+
+    .img-info {
+        width: 24px;
+        height: 24px;
+    }
+
+    .h3-info {
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+
+    .maps-iframe,
+    .iframe-maps {
+        min-height: 250px;
     }
 }
 
