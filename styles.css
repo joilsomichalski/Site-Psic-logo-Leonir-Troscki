@@ -4231,3 +4231,19 @@ iframe {
         line-height: 1.35;
     }
 }
+
+@media (max-width: 900px) {
+    .texto-sobre-leo,
+    .diferenciais .p-diferenciais {
+        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        line-height: 1.45;
+    }
+}
+
+@media (max-width: 700px) {
+    .texto-sobre-leo,
+    .diferenciais .p-diferenciais {
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+}
