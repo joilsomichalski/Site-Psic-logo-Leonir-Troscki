@@ -131,6 +131,87 @@ if (carrosselProcesso) {
     atualizarCarrossel();
 }
 
+const listaTerapias = document.querySelector(".lista-terapias");
+
+if (listaTerapias) {
+    const cardsTerapias = Array.from(listaTerapias.querySelectorAll(".terapias"));
+    const controlesTerapias = document.createElement("div");
+    const btnTerapiasAnterior = document.createElement("button");
+    const btnTerapiasProximo = document.createElement("button");
+    const mobileTerapias = window.matchMedia("(max-width: 900px)");
+    let indiceTerapiaAtual = 0;
+
+    controlesTerapias.className = "carrossel-terapias-controles";
+    btnTerapiasAnterior.type = "button";
+    btnTerapiasProximo.type = "button";
+    btnTerapiasAnterior.className =
+        "btn-carrossel-terapias btn-carrossel-terapias-anterior";
+    btnTerapiasProximo.className =
+        "btn-carrossel-terapias btn-carrossel-terapias-proximo";
+    btnTerapiasAnterior.setAttribute("aria-label", "Mostrar terapia anterior");
+    btnTerapiasProximo.setAttribute("aria-label", "Mostrar próxima terapia");
+    btnTerapiasAnterior.textContent = "<";
+    btnTerapiasProximo.textContent = ">";
+    controlesTerapias.append(btnTerapiasAnterior, btnTerapiasProximo);
+    listaTerapias.insertAdjacentElement("afterend", controlesTerapias);
+
+    const atualizarControlesTerapias = () => {
+        const mobile = mobileTerapias.matches;
+
+        controlesTerapias.hidden = !mobile;
+
+        if (!mobile) {
+            listaTerapias.scrollTo({ left: 0 });
+            indiceTerapiaAtual = 0;
+            return;
+        }
+
+        btnTerapiasAnterior.disabled = indiceTerapiaAtual === 0;
+        btnTerapiasProximo.disabled =
+            indiceTerapiaAtual >= cardsTerapias.length - 1;
+    };
+
+    const irParaTerapia = (indice) => {
+        indiceTerapiaAtual = Math.min(
+            Math.max(indice, 0),
+            cardsTerapias.length - 1
+        );
+
+        const cardAtual = cardsTerapias[indiceTerapiaAtual];
+
+        if (mobileTerapias.matches && cardAtual) {
+            listaTerapias.scrollTo({
+                left: cardAtual.offsetLeft - listaTerapias.offsetLeft,
+                behavior: "smooth",
+            });
+        }
+
+        atualizarControlesTerapias();
+    };
+
+    btnTerapiasAnterior.addEventListener("click", () => {
+        irParaTerapia(indiceTerapiaAtual - 1);
+    });
+
+    btnTerapiasProximo.addEventListener("click", () => {
+        irParaTerapia(indiceTerapiaAtual + 1);
+    });
+
+    listaTerapias.addEventListener("scroll", () => {
+        if (!mobileTerapias.matches) {
+            return;
+        }
+
+        const larguraCard = cardsTerapias[0]?.offsetWidth || 1;
+        indiceTerapiaAtual = Math.round(listaTerapias.scrollLeft / larguraCard);
+        atualizarControlesTerapias();
+    });
+
+    mobileTerapias.addEventListener("change", atualizarControlesTerapias);
+    window.addEventListener("resize", atualizarControlesTerapias);
+    atualizarControlesTerapias();
+}
+
 const numeroWhatsApp = "5547991049570";
 const mensagemWhatsApp = `Olá Psicólogo Leonir Troscki! 😃
 
