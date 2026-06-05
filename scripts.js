@@ -49,6 +49,9 @@ if (carrosselProcesso) {
         { inicio: "0%", largura: "25%" },
     ];
     let primeiroCardVisivel = 0;
+    let arrastandoProcesso = false;
+    let arrastouProcesso = false;
+    let inicioArrasteProcesso = 0;
 
     const criarBotaoCarrossel = (classe, descricao) => {
         const botao = document.createElement("button");
@@ -115,18 +118,104 @@ if (carrosselProcesso) {
         atualizarLinhaPontilhada();
     };
 
-    window.addEventListener("resize", atualizarCarrossel);
-
-    btnAnterior.addEventListener("click", () => {
+    const mostrarProcessoAnterior = () => {
         primeiroCardVisivel = Math.max(0, primeiroCardVisivel - 1);
         atualizarCarrossel();
-    });
+    };
 
-    btnProximo.addEventListener("click", () => {
+    const mostrarProcessoProximo = () => {
+        if (cardsProcesso.length <= quantidadeVisivel) {
+            return;
+        }
+
         primeiroCardVisivel =
             (primeiroCardVisivel + 1) % cardsProcesso.length;
         atualizarCarrossel();
+    };
+
+    const finalizarArrasteProcesso = (evento) => {
+        if (!arrastandoProcesso) {
+            return;
+        }
+
+        arrastandoProcesso = false;
+        carrosselProcesso.classList.remove("arrastando");
+
+        if (typeof carrosselProcesso.releasePointerCapture === "function") {
+            try {
+                carrosselProcesso.releasePointerCapture(evento.pointerId);
+            } catch {
+                // Alguns navegadores liberam o ponteiro automaticamente.
+            }
+        }
+
+        const distanciaArrastada = evento.clientX - inicioArrasteProcesso;
+        const limiteArraste = 45;
+
+        if (Math.abs(distanciaArrastada) < limiteArraste) {
+            return;
+        }
+
+        if (distanciaArrastada < 0) {
+            mostrarProcessoProximo();
+            return;
+        }
+
+        mostrarProcessoAnterior();
+    };
+
+    window.addEventListener("resize", atualizarCarrossel);
+
+    btnAnterior.addEventListener("click", () => {
+        mostrarProcessoAnterior();
     });
+
+    btnProximo.addEventListener("click", () => {
+        mostrarProcessoProximo();
+    });
+
+    carrosselProcesso.addEventListener("pointerdown", (evento) => {
+        if (evento.target.closest(".btn-carrossel-processo")) {
+            return;
+        }
+
+        arrastandoProcesso = true;
+        arrastouProcesso = false;
+        inicioArrasteProcesso = evento.clientX;
+        carrosselProcesso.classList.add("arrastando");
+
+        if (typeof carrosselProcesso.setPointerCapture === "function") {
+            carrosselProcesso.setPointerCapture(evento.pointerId);
+        }
+    });
+
+    carrosselProcesso.addEventListener("pointermove", (evento) => {
+        if (!arrastandoProcesso) {
+            return;
+        }
+
+        if (Math.abs(evento.clientX - inicioArrasteProcesso) > 8) {
+            arrastouProcesso = true;
+        }
+    });
+
+    carrosselProcesso.addEventListener("pointerup", finalizarArrasteProcesso);
+    carrosselProcesso.addEventListener("pointercancel", finalizarArrasteProcesso);
+    carrosselProcesso.addEventListener("pointerleave", finalizarArrasteProcesso);
+
+    carrosselProcesso.addEventListener(
+        "click",
+        (evento) => {
+            if (!arrastouProcesso) {
+                return;
+            }
+
+            evento.preventDefault();
+            evento.stopPropagation();
+            arrastouProcesso = false;
+        },
+        true
+    );
 
     atualizarCarrossel();
 }
@@ -140,6 +229,11 @@ if (listaTerapias) {
     const btnTerapiasProximo = document.createElement("button");
     const mobileTerapias = window.matchMedia("(max-width: 900px)");
     let indiceTerapiaAtual = 0;
+    let arrastandoTerapias = false;
+    let arrastouTerapias = false;
+    let inicioArrasteTerapias = 0;
+    let scrollInicialTerapias = 0;
+    let indiceInicialArrasteTerapias = 0;
 
     controlesTerapias.className = "carrossel-terapias-controles";
     btnTerapiasAnterior.type = "button";
@@ -166,16 +260,33 @@ if (listaTerapias) {
             return;
         }
 
-        btnTerapiasAnterior.disabled = indiceTerapiaAtual === 0;
-        btnTerapiasProximo.disabled =
-            indiceTerapiaAtual >= cardsTerapias.length - 1;
+        btnTerapiasAnterior.disabled = cardsTerapias.length <= 1;
+        btnTerapiasProximo.disabled = cardsTerapias.length <= 1;
+    };
+
+    const obterLarguraCardTerapia = () =>
+        cardsTerapias[0]?.offsetWidth || listaTerapias.clientWidth || 1;
+
+    const normalizarIndiceTerapia = (indice) => {
+        if (cardsTerapias.length === 0) {
+            return 0;
+        }
+
+        return ((indice % cardsTerapias.length) + cardsTerapias.length) %
+            cardsTerapias.length;
+    };
+
+    const atualizarIndiceTerapiaPeloScroll = () => {
+        const larguraCard = obterLarguraCardTerapia();
+
+        indiceTerapiaAtual = Math.min(
+            Math.max(Math.round(listaTerapias.scrollLeft / larguraCard), 0),
+            cardsTerapias.length - 1
+        );
     };
 
     const irParaTerapia = (indice) => {
-        indiceTerapiaAtual = Math.min(
-            Math.max(indice, 0),
-            cardsTerapias.length - 1
-        );
+        indiceTerapiaAtual = normalizarIndiceTerapia(indice);
 
         const cardAtual = cardsTerapias[indiceTerapiaAtual];
 
@@ -187,6 +298,38 @@ if (listaTerapias) {
         }
 
         atualizarControlesTerapias();
+    };
+
+    const finalizarArrasteTerapias = (evento) => {
+        if (!arrastandoTerapias) {
+            return;
+        }
+
+        arrastandoTerapias = false;
+        listaTerapias.classList.remove("arrastando");
+
+        if (typeof listaTerapias.releasePointerCapture === "function") {
+            try {
+                listaTerapias.releasePointerCapture(evento.pointerId);
+            } catch {
+                // Alguns navegadores liberam o ponteiro automaticamente.
+            }
+        }
+
+        const distanciaArrastada = evento.clientX - inicioArrasteTerapias;
+        const limiteArraste = 45;
+
+        if (Math.abs(distanciaArrastada) >= limiteArraste) {
+            irParaTerapia(
+                distanciaArrastada < 0
+                    ? indiceInicialArrasteTerapias + 1
+                    : indiceInicialArrasteTerapias - 1
+            );
+            return;
+        }
+
+        atualizarIndiceTerapiaPeloScroll();
+        irParaTerapia(indiceTerapiaAtual);
     };
 
     btnTerapiasAnterior.addEventListener("click", () => {
@@ -202,10 +345,58 @@ if (listaTerapias) {
             return;
         }
 
-        const larguraCard = cardsTerapias[0]?.offsetWidth || 1;
-        indiceTerapiaAtual = Math.round(listaTerapias.scrollLeft / larguraCard);
+        atualizarIndiceTerapiaPeloScroll();
         atualizarControlesTerapias();
     });
+
+    listaTerapias.addEventListener("pointerdown", (evento) => {
+        if (!mobileTerapias.matches || evento.target.closest("button")) {
+            return;
+        }
+
+        arrastandoTerapias = true;
+        arrastouTerapias = false;
+        inicioArrasteTerapias = evento.clientX;
+        scrollInicialTerapias = listaTerapias.scrollLeft;
+        indiceInicialArrasteTerapias = indiceTerapiaAtual;
+        listaTerapias.classList.add("arrastando");
+
+        if (typeof listaTerapias.setPointerCapture === "function") {
+            listaTerapias.setPointerCapture(evento.pointerId);
+        }
+    });
+
+    listaTerapias.addEventListener("pointermove", (evento) => {
+        if (!arrastandoTerapias || !mobileTerapias.matches) {
+            return;
+        }
+
+        const distancia = evento.clientX - inicioArrasteTerapias;
+
+        if (Math.abs(distancia) > 8) {
+            arrastouTerapias = true;
+        }
+
+        listaTerapias.scrollLeft = scrollInicialTerapias - distancia;
+    });
+
+    listaTerapias.addEventListener("pointerup", finalizarArrasteTerapias);
+    listaTerapias.addEventListener("pointercancel", finalizarArrasteTerapias);
+    listaTerapias.addEventListener("pointerleave", finalizarArrasteTerapias);
+
+    listaTerapias.addEventListener(
+        "click",
+        (evento) => {
+            if (!arrastouTerapias) {
+                return;
+            }
+
+            evento.preventDefault();
+            evento.stopPropagation();
+            arrastouTerapias = false;
+        },
+        true
+    );
 
     mobileTerapias.addEventListener("change", atualizarControlesTerapias);
     window.addEventListener("resize", atualizarControlesTerapias);
@@ -410,6 +601,30 @@ if (carrosselDepoimentos) {
     const janelaDepoimentos = carrosselDepoimentos.parentElement;
 
     if (janelaDepoimentos) {
+        const liberarPonteiroDepoimentos = (evento) => {
+            if (
+                evento &&
+                typeof janelaDepoimentos.releasePointerCapture === "function"
+            ) {
+                try {
+                    janelaDepoimentos.releasePointerCapture(evento.pointerId);
+                } catch {
+                    // Alguns navegadores liberam o ponteiro automaticamente.
+                }
+            }
+        };
+
+        const finalizarArrasteDepoimentos = (evento) => {
+            if (!arrastandoDepoimentos) {
+                return;
+            }
+
+            arrastandoDepoimentos = false;
+            janelaDepoimentos.classList.remove("arrastando");
+            liberarPonteiroDepoimentos(evento);
+            continuarAnimacaoCarrosselDepoimentos();
+        };
+
         janelaDepoimentos.addEventListener("pointerdown", (evento) => {
             arrastandoDepoimentos = true;
             inicioArrasteDepoimentos = evento.clientX;
@@ -417,7 +632,9 @@ if (carrosselDepoimentos) {
             translateAtualDepoimentos = translateInicialDepoimentos;
 
             janelaDepoimentos.classList.add("arrastando");
-            janelaDepoimentos.setPointerCapture(evento.pointerId);
+            if (typeof janelaDepoimentos.setPointerCapture === "function") {
+                janelaDepoimentos.setPointerCapture(evento.pointerId);
+            }
             carrosselDepoimentos.style.transform = `translateX(${translateAtualDepoimentos}px)`;
             evento.preventDefault();
         });
@@ -435,26 +652,9 @@ if (carrosselDepoimentos) {
             carrosselDepoimentos.style.transform = `translateX(${translateAtualDepoimentos}px)`;
         });
 
-        janelaDepoimentos.addEventListener("pointerup", (evento) => {
-            if (!arrastandoDepoimentos) {
-                return;
-            }
-
-            arrastandoDepoimentos = false;
-            janelaDepoimentos.classList.remove("arrastando");
-            janelaDepoimentos.releasePointerCapture(evento.pointerId);
-            continuarAnimacaoCarrosselDepoimentos();
-        });
-
-        janelaDepoimentos.addEventListener("pointercancel", () => {
-            if (!arrastandoDepoimentos) {
-                return;
-            }
-
-            arrastandoDepoimentos = false;
-            janelaDepoimentos.classList.remove("arrastando");
-            continuarAnimacaoCarrosselDepoimentos();
-        });
+        janelaDepoimentos.addEventListener("pointerup", finalizarArrasteDepoimentos);
+        janelaDepoimentos.addEventListener("pointercancel", finalizarArrasteDepoimentos);
+        janelaDepoimentos.addEventListener("pointerleave", finalizarArrasteDepoimentos);
     }
 }
 

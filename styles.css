@@ -1116,6 +1116,14 @@ p{
 
     width: min(86vw, 1650px);
     margin: 90px auto 0;
+    cursor: grab;
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
+    user-select: none;
+}
+
+.carrossel.arrastando {
+    cursor: grabbing;
 }
 
 .carrossel > div {
@@ -3383,7 +3391,15 @@ iframe {
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
+        touch-action: pan-y;
+        overscroll-behavior-x: contain;
+        cursor: grab;
         -webkit-overflow-scrolling: touch;
+    }
+
+    .lista-terapias.arrastando {
+        scroll-behavior: auto;
+        cursor: grabbing;
     }
 
     .lista-terapias::-webkit-scrollbar {
@@ -4188,5 +4204,25 @@ iframe {
 
     .pergunta.aberta p {
         max-height: 760px;
+    }
+}
+
+@media (min-width: 901px) {
+    p,
+    .p-psico,
+    .p-sentidos,
+    .texto-sobre-leo,
+    .p-abordagem,
+    .p-terapias,
+    .acolhimento p,
+    .Especializacao p,
+    .Confianca p,
+    .p-diferenciais,
+    .p-processo,
+    .p-depo,
+    .p-depoimento,
+    .pergunta p,
+    .p-chamada {
+        font-size: 1.2rem;
     }
 }
