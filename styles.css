@@ -4225,4 +4225,9 @@ iframe {
     .p-chamada {
         font-size: 1.2rem;
     }
+
+    .diferenciais .p-diferenciais {
+        font-size: 1rem;
+        line-height: 1.35;
+    }
 }
