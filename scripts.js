@@ -1,5 +1,34 @@
 const cardsEmocoes = document.querySelectorAll(".emocao");
 
+const linksRolagemInterna = document.querySelectorAll('a[href^="#"]');
+
+linksRolagemInterna.forEach((link) => {
+    link.addEventListener("click", (evento) => {
+        const idDestino = link.getAttribute("href");
+
+        if (!idDestino || idDestino === "#") {
+            return;
+        }
+
+        const destino = document.querySelector(idDestino);
+
+        if (!destino) {
+            return;
+        }
+
+        const reduzirMovimento = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        evento.preventDefault();
+        destino.scrollIntoView({
+            behavior: reduzirMovimento ? "auto" : "smooth",
+            block: "start",
+        });
+        history.pushState(null, "", idDestino);
+    });
+});
+
 cardsEmocoes.forEach((cardSelecionado) => {
     const btnAbrir = cardSelecionado.querySelector(".btn-saiba-mais");
     const btnFechar = cardSelecionado.querySelector(".btn-fechar");

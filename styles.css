@@ -23,6 +23,14 @@
     --recuo-main-inicial: 50px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+[id] {
+    scroll-margin-top: 40px;
+}
+
 .container-principal{
     display: flex;
     flex-direction: column;
@@ -4207,43 +4215,93 @@ iframe {
     }
 }
 
-@media (min-width: 901px) {
-    p,
-    .p-psico,
-    .p-sentidos,
-    .texto-sobre-leo,
-    .p-abordagem,
-    .p-terapias,
-    .acolhimento p,
-    .Especializacao p,
-    .Confianca p,
-    .p-diferenciais,
-    .p-processo,
-    .p-depo,
-    .p-depoimento,
-    .pergunta p,
-    .p-chamada {
-        font-size: 1.2rem;
-    }
-
-    .diferenciais .p-diferenciais {
-        font-size: 1rem;
-        line-height: 1.35;
-    }
+:root {
+    --p-padrao-font-size: 1rem;
+    --p-padrao-line-height: 1.35;
 }
 
 @media (max-width: 900px) {
-    .texto-sobre-leo,
-    .diferenciais .p-diferenciais {
-        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
-        line-height: 1.45;
+    :root {
+        --p-padrao-font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        --p-padrao-line-height: 1.45;
     }
 }
 
 @media (max-width: 700px) {
-    .texto-sobre-leo,
-    .diferenciais .p-diferenciais {
-        font-size: 0.95rem;
-        line-height: 1.45;
+    :root {
+        --p-padrao-font-size: 0.95rem;
+        --p-padrao-line-height: 1.45;
+    }
+}
+
+p,
+.p-psico,
+.p-sentidos,
+.texto-sobre-leo,
+.p-abordagem,
+.p-terapias,
+.acolhimento p,
+.Especializacao p,
+.Confianca p,
+.diferenciais .p-diferenciais,
+.p-diferenciais,
+.p-processo,
+.p-depo,
+.p-depoimento,
+.pergunta p,
+.p-chamada {
+    font-size: var(--p-padrao-font-size);
+    line-height: var(--p-padrao-line-height);
+}
+
+@media (min-width: 901px) {
+    .lista-terapias {
+        column-gap: clamp(38px, 6vw, 120px);
+    }
+
+    .carrossel,
+    .carrossel-depoimentos-janela {
+        width: min(82vw, 1500px);
+        margin-top: 72px;
+    }
+
+    .carrossel {
+        column-gap: clamp(38px, 5vw, 100px);
+    }
+
+    .carrossel > div {
+        height: 520px;
+        padding: 22px 46px 34px;
+    }
+
+    .img-processo {
+        height: 160px;
+        margin-bottom: 16px;
+    }
+
+    .titulo-processo {
+        font-size: 1.75rem;
+    }
+
+    .carrossel-depoimentos {
+        --depoimentos-gap: clamp(20px, 2.8vw, 50px);
+        --largura-card-depoimento: 30%;
+    }
+
+    .depoimento {
+        grid-template-rows: 60px 1fr 95px;
+        row-gap: 14px;
+        min-height: 455px;
+        padding: 18px 26px 34px;
+    }
+
+    .avaliacao-stars {
+        width: 150px;
+        height: 48px;
+    }
+
+    .persona-depoimento {
+        width: 72px;
+        height: 72px;
     }
 }
