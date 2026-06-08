@@ -34,6 +34,8 @@ cardsEmocoes.forEach((cardSelecionado) => {
     const btnFechar = cardSelecionado.querySelector(".btn-fechar");
 
     btnAbrir.addEventListener("click", () => {
+        const posicaoAntesDeAbrir = cardSelecionado.getBoundingClientRect().top;
+
         cardsEmocoes.forEach((card) => {
             if (card !== cardSelecionado) {
                 card.classList.add("oculta");
@@ -41,6 +43,16 @@ cardsEmocoes.forEach((cardSelecionado) => {
         });
 
         cardSelecionado.classList.add("aberta");
+
+        requestAnimationFrame(() => {
+            const posicaoDepoisDeAbrir = cardSelecionado.getBoundingClientRect().top;
+
+            window.scrollBy({
+                top: posicaoDepoisDeAbrir - posicaoAntesDeAbrir,
+                left: 0,
+                behavior: "auto",
+            });
+        });
     });
 
     btnFechar.addEventListener("click", () => {
@@ -256,7 +268,6 @@ if (listaTerapias) {
     const controlesTerapias = document.createElement("div");
     const btnTerapiasAnterior = document.createElement("button");
     const btnTerapiasProximo = document.createElement("button");
-    const mobileTerapias = window.matchMedia("(max-width: 900px)");
     let indiceTerapiaAtual = 0;
     let arrastandoTerapias = false;
     let arrastouTerapias = false;
@@ -278,12 +289,15 @@ if (listaTerapias) {
     controlesTerapias.append(btnTerapiasAnterior, btnTerapiasProximo);
     listaTerapias.insertAdjacentElement("afterend", controlesTerapias);
 
+    const terapiasTemRolagem = () =>
+        listaTerapias.scrollWidth > listaTerapias.clientWidth + 2;
+
     const atualizarControlesTerapias = () => {
-        const mobile = mobileTerapias.matches;
+        const podeNavegar = cardsTerapias.length > 1 && terapiasTemRolagem();
 
-        controlesTerapias.hidden = !mobile;
+        controlesTerapias.hidden = !podeNavegar;
 
-        if (!mobile) {
+        if (!podeNavegar) {
             listaTerapias.scrollTo({ left: 0 });
             indiceTerapiaAtual = 0;
             return;
@@ -319,7 +333,7 @@ if (listaTerapias) {
 
         const cardAtual = cardsTerapias[indiceTerapiaAtual];
 
-        if (mobileTerapias.matches && cardAtual) {
+        if (cardAtual && terapiasTemRolagem()) {
             listaTerapias.scrollTo({
                 left: cardAtual.offsetLeft - listaTerapias.offsetLeft,
                 behavior: "smooth",
@@ -370,7 +384,7 @@ if (listaTerapias) {
     });
 
     listaTerapias.addEventListener("scroll", () => {
-        if (!mobileTerapias.matches) {
+        if (!terapiasTemRolagem()) {
             return;
         }
 
@@ -379,7 +393,7 @@ if (listaTerapias) {
     });
 
     listaTerapias.addEventListener("pointerdown", (evento) => {
-        if (!mobileTerapias.matches || evento.target.closest("button")) {
+        if (!terapiasTemRolagem() || evento.target.closest("button")) {
             return;
         }
 
@@ -396,7 +410,7 @@ if (listaTerapias) {
     });
 
     listaTerapias.addEventListener("pointermove", (evento) => {
-        if (!arrastandoTerapias || !mobileTerapias.matches) {
+        if (!arrastandoTerapias || !terapiasTemRolagem()) {
             return;
         }
 
@@ -427,7 +441,6 @@ if (listaTerapias) {
         true
     );
 
-    mobileTerapias.addEventListener("change", atualizarControlesTerapias);
     window.addEventListener("resize", atualizarControlesTerapias);
     atualizarControlesTerapias();
 }
@@ -456,6 +469,7 @@ const elementosAnimacaoScroll = document.querySelectorAll(
         ".h3-section",
         ".btn-psico",
         ".titulo-emocoes",
+        ".btn-saiba-mais",
         ".img-sobre-imagens",
         ".sobre-leo",
         ".leonir",
@@ -480,7 +494,8 @@ if (elementosAnimacaoScroll.length > 0) {
                 });
             },
             {
-                threshold: 0.3,
+                rootMargin: "0px 0px -8% 0px",
+                threshold: 0.08,
             }
         );
 
@@ -522,11 +537,12 @@ if (carrosselDepoimentos) {
         const estilosCarrossel = getComputedStyle(carrosselDepoimentos);
         const espacoEntreCards = parseFloat(estilosCarrossel.columnGap) || 0;
         const quantidadeVisivelDepoimentos =
-            window.innerWidth <= 700 ? 1 : window.innerWidth <= 900 ? 2 : 3;
-        const larguraCard =
-            (janelaCarrossel.clientWidth -
+            window.innerWidth <= 900 ? 1 : 3;
+        const larguraCard = window.innerWidth <= 900
+            ? Math.min(window.innerWidth * 0.78, 420)
+            : (janelaCarrossel.clientWidth -
                 espacoEntreCards * (quantidadeVisivelDepoimentos - 1)) /
-            quantidadeVisivelDepoimentos;
+                quantidadeVisivelDepoimentos;
 
         carrosselDepoimentos.style.setProperty(
             "--largura-card-depoimento",
