@@ -4525,7 +4525,7 @@ p,
         overflow: visible;
         background-image: url('./assets/FOTO CAPA.webp');
         background-size: auto 100%;
-        background-position: calc(42% - clamp(13px, calc(157px - 38vw), 35px)) center;
+        background-position: calc(42% - clamp(13px, calc(157px - 38vw), 35px) + 8px) center;
         background-repeat: no-repeat;
         background-color: var(--branco-frio-color);
     }
@@ -4635,7 +4635,7 @@ p,
 
 @media (min-width: 750px) and (max-width: 900px) {
     .container-principal {
-        background-position: calc(42% + 28.5vw - 219px) center;
+        background-position: calc(42% + 28.5vw - 211px) center;
     }
 }
 
