@@ -1452,12 +1452,23 @@ p{
     border-radius: 12px;
 }
 
-.doctoralia-foto {
+.doctoralia-foto-moldura {
+    display: block;
     width: 96px;
     height: 96px;
-    object-fit: cover;
-    border: 3px solid var(--azul-claro-color);
+    overflow: hidden;
     border-radius: 50%;
+}
+
+.doctoralia-foto {
+    display: block;
+    width: 112%;
+    max-width: none;
+    height: 112%;
+    object-fit: cover;
+    border: 0;
+    border-radius: 0;
+    transform: translate(-5.35%, -5.35%);
 }
 
 .doctoralia-identidade {
@@ -1589,7 +1600,7 @@ p{
         border-radius: 8px;
     }
 
-    .doctoralia-foto {
+    .doctoralia-foto-moldura {
         width: 72px;
         height: 72px;
     }
@@ -4508,13 +4519,13 @@ p,
         align-items: stretch;
         justify-content: flex-start;
         width: 100%;
-        height: clamp(300px, 72vw, 560px);
+        height: clamp(340px, 80vw, 600px);
         min-height: 0;
         padding: 0;
         overflow: visible;
         background-image: url('./assets/FOTO CAPA.webp');
         background-size: auto 100%;
-        background-position: 42% center;
+        background-position: calc(42% - clamp(13px, calc(157px - 38vw), 35px)) center;
         background-repeat: no-repeat;
         background-color: var(--branco-frio-color);
     }
@@ -4585,7 +4596,7 @@ p,
 
     .container-principal .h2-psico {
         max-width: none;
-        font-size: clamp(0.68rem, 2.8vw, 1.55rem);
+        font-size: clamp(0.8rem, 3.2vw, 1.75rem);
         font-weight: 800;
         line-height: 1.15;
         color: var(--azul-escuro-color);
@@ -4595,7 +4606,7 @@ p,
     .container-principal .p-psico {
         display: block;
         margin-top: 0.7vw;
-        font-size: clamp(0.5rem, 1.75vw, 0.98rem);
+        font-size: clamp(0.6rem, 2.05vw, 1.1rem);
         line-height: 1.2;
     }
 
@@ -4619,6 +4630,12 @@ p,
         line-height: normal;
         box-shadow: none;
         white-space: nowrap;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 900px) {
+    .container-principal {
+        background-position: calc(42% + 28.5vw - 219px) center;
     }
 }
 
@@ -5084,8 +5101,15 @@ p,
 
     .container-principal .p-psico {
         text-shadow:
-            0 0 8px rgba(255, 255, 255, 0.95),
-            0 0 16px rgba(255, 255, 255, 0.75);
+            0 0 2px #fff,
+            0 0 5px rgba(255, 255, 255, 0.95),
+            0 0 9px rgba(255, 255, 255, 0.7);
+    }
+
+    .container-principal .h2-psico {
+        text-shadow:
+            0 0 2px #fff,
+            0 0 6px rgba(255, 255, 255, 0.85);
     }
 
     .container-principal .h2-section {
@@ -5273,7 +5297,7 @@ p,
         padding: 18px 20px;
     }
 
-    .doctoralia-foto {
+    .doctoralia-foto-moldura {
         width: 84px;
         height: 84px;
     }
@@ -5424,4 +5448,40 @@ p,
         z-index: 3;
     }
 
+}
+
+@keyframes entrada-carrossel-mobile {
+    from {
+        opacity: 0;
+        transform: translateX(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .processo-terapeutico .carrossel > div,
+    .processo-terapeutico .carrossel > div.card-processo-visivel {
+        box-sizing: border-box;
+        width: 100%;
+        height: 500px;
+        min-height: 500px;
+        max-height: 500px;
+    }
+
+    .processo-terapeutico .carrossel.animar > div.card-processo-visivel {
+        animation: entrada-carrossel-mobile 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+}
+
+@media (max-width: 700px) {
+    .processo-terapeutico .carrossel > div,
+    .processo-terapeutico .carrossel > div.card-processo-visivel {
+        height: 430px;
+        min-height: 430px;
+        max-height: 430px;
+    }
 }
