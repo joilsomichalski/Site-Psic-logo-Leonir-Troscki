@@ -1172,6 +1172,21 @@ p{
     color: var(--azul-escuro-color);
 }
 
+.container-btn-processo {
+    display: flex;
+    justify-content: center;
+    margin: 48px auto 0;
+    padding: 0 3vw;
+}
+
+.btn-processo {
+    margin-top: 0;
+}
+
+.container-btn-processo + .line-pontilhada {
+    margin-top: 60px;
+}
+
 /* Setas clicáveis criadas pelo JavaScript */
 .btn-carrossel-processo {
     position: absolute;
@@ -5463,6 +5478,15 @@ p,
 }
 
 @media (max-width: 900px) {
+    .container-btn-processo {
+        margin-top: 30px;
+        padding: 0 4vw;
+    }
+
+    .container-btn-processo + .line-pontilhada {
+        margin-top: 36px;
+    }
+
     .processo-terapeutico .carrossel > div,
     .processo-terapeutico .carrossel > div.card-processo-visivel {
         box-sizing: border-box;
