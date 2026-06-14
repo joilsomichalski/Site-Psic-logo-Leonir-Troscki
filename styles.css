@@ -1354,6 +1354,17 @@ p{
     will-change: transform;
 }
 
+.carrossel-depoimentos.carrossel-controlado-js {
+    animation: none !important;
+    transform: translate3d(0, 0, 0);
+}
+
+.carrossel-depoimentos-janela,
+.carrossel-depoimentos-janela * {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 .carrossel-depoimentos.carrossel-depoimentos-ativo.animar {
     animation: carrossel-depoimentos-passando 28s linear infinite;
     animation-delay: var(--depoimentos-animation-delay);
@@ -1421,6 +1432,213 @@ p{
 
     to {
         transform: translateX(calc(-0.2 * var(--distancia-depoimentos)));
+    }
+}
+
+.doctoralia-local {
+    width: min(86vw, 1650px);
+    margin: 0 auto 45px;
+}
+
+.doctoralia-perfil {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 22px;
+    margin-top: 96px;
+    padding: 22px 28px;
+    background-color: var(--branco-frio-color);
+    border: 2px solid var(--azul-claro-color);
+    border-radius: 12px;
+}
+
+.doctoralia-foto {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border: 3px solid var(--azul-claro-color);
+    border-radius: 50%;
+}
+
+.doctoralia-identidade {
+    min-width: 0;
+}
+
+.doctoralia-especialidade,
+.doctoralia-nome,
+.doctoralia-origem {
+    font-family: var(--font-family);
+}
+
+.doctoralia-especialidade {
+    margin: 0 0 3px;
+    color: var(--marrom-claro-color);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.doctoralia-nome {
+    margin: 0;
+    color: var(--azul-escuro-color);
+    font-size: 1.65rem;
+    line-height: 1.1;
+}
+
+.doctoralia-resumo-avaliacao {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    color: var(--azul-escuro-color);
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.doctoralia-stars {
+    grid-area: estrelas;
+    align-self: center;
+    justify-self: start;
+    color: #efb21a;
+    font-family: Arial, sans-serif;
+    font-size: 1.7rem;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.doctoralia-stars .estrela-vazia {
+    color: #d5d5d5;
+}
+
+.btn-doctoralia {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 45px;
+    border-radius: 5px;
+    background-color: var(--azul-medio-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-doctoralia:hover,
+.btn-doctoralia:focus-visible {
+    background-color: var(--azul-escuro-color);
+    transform: translateY(-2px);
+}
+
+.doctoralia-origem {
+    margin: 22px 0 0;
+    color: var(--marrom-claro-color);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.carrossel-doctoralia-janela {
+    width: 100%;
+    margin-top: 38px;
+}
+
+.depoimento-doctoralia {
+    grid-template-areas:
+        "estrelas"
+        "texto"
+        "persona";
+}
+
+.doctoralia-autor {
+    grid-area: persona;
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    justify-self: start;
+    gap: 5px;
+    color: var(--azul-escuro-color);
+    font-family: var(--font-family);
+}
+
+.doctoralia-autor strong {
+    font-size: 1rem;
+}
+
+.doctoralia-autor time {
+    color: var(--marrom-claro-color);
+    font-size: 0.82rem;
+}
+
+@media (max-width: 900px) {
+    .doctoralia-local {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 32px;
+    }
+
+    .doctoralia-perfil {
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 12px;
+        width: calc(100% - 8vw);
+        margin: 72px auto 0;
+        padding: 14px;
+        border-radius: 8px;
+    }
+
+    .doctoralia-foto {
+        width: 72px;
+        height: 72px;
+    }
+
+    .doctoralia-local .doctoralia-especialidade {
+        margin-bottom: 2px;
+        font-size: 0.72rem;
+    }
+
+    .doctoralia-local .doctoralia-nome {
+        font-size: 1.05rem;
+        white-space: nowrap;
+    }
+
+    .doctoralia-resumo-avaliacao {
+        gap: 5px;
+        margin-top: 5px;
+        font-size: 0.7rem;
+    }
+
+    .doctoralia-stars {
+        font-size: 1.25rem;
+    }
+
+    .btn-doctoralia {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 2px;
+        padding: 8px 34px;
+        font-size: 1.35rem;
+    }
+
+    .doctoralia-local .doctoralia-origem {
+        width: calc(100% - 8vw);
+        margin: 16px auto 0;
+        font-size: 0.7rem;
+        text-align: left;
+    }
+
+    .doctoralia-local .carrossel-doctoralia-janela {
+        margin-top: 30px;
+    }
+
+    .depoimento-doctoralia .doctoralia-autor strong {
+        font-size: 0.82rem;
+    }
+
+    .depoimento-doctoralia .doctoralia-autor time {
+        font-size: 0.68rem;
     }
 }
 
@@ -4883,4 +5101,327 @@ p,
         margin-top: 0;
         row-gap: 34px;
     }
+}
+
+.doctoralia-section {
+    margin-top: 0;
+    padding-top: 1px;
+    padding-bottom: 72px;
+}
+
+.doctoralia-section .doctoralia-line {
+    width: min(86vw, 1601px);
+    margin-top: 72px;
+    margin-bottom: 184px;
+}
+
+.doctoralia-section .h1-depoimentos {
+    font-size: clamp(2rem, 4vw, 3.7rem);
+}
+
+.h1-doctoralia .doctoralia-marca {
+    display: inline;
+    color: #00a085;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.depoimento-doctoralia,
+.depoimentos:not(.doctoralia-section) .depoimento {
+    grid-template-rows: 40px 1fr 52px;
+    min-height: 325px;
+    row-gap: 8px;
+    padding: 12px 20px 16px;
+}
+
+.depoimento-doctoralia {
+    position: relative;
+}
+
+.depoimento-doctoralia::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 1.4rem;
+    height: 1.4rem;
+    background: url('./assets/LOGO DOCTORALIA.png') center / contain no-repeat;
+    pointer-events: none;
+}
+
+.depoimento-doctoralia .doctoralia-stars {
+    font-size: 1.4rem;
+}
+
+.depoimento-doctoralia .p-depoimento {
+    font-size: 0.92rem;
+    line-height: 1.3;
+}
+
+.depoimentos:not(.doctoralia-section) .avaliacao-stars {
+    width: 125px;
+    height: 42px;
+}
+
+.depoimentos:not(.doctoralia-section) .p-depoimento {
+    font-size: 0.92rem;
+    line-height: 1.3;
+}
+
+.depoimentos:not(.doctoralia-section) .persona-depoimento {
+    width: 58px;
+    height: 58px;
+}
+
+.processo-terapeutico .carrossel > div,
+.processo-terapeutico .carrossel > div.card-processo-visivel {
+    padding: 18px 38px 28px;
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+    .doctoralia-section {
+        padding-bottom: 64px;
+    }
+
+    .doctoralia-section .doctoralia-line {
+        margin-top: 64px;
+        margin-bottom: 116px;
+    }
+
+    .depoimento-doctoralia,
+    .depoimentos:not(.doctoralia-section) .depoimento {
+        grid-template-rows: 38px 1fr 50px;
+        min-height: 310px;
+        padding: 12px 18px 15px;
+    }
+
+    .depoimento-doctoralia .p-depoimento,
+    .depoimentos:not(.doctoralia-section) .p-depoimento {
+        font-size: 0.86rem;
+    }
+
+    .doctoralia-perfil {
+        gap: 18px;
+        padding: 20px 24px;
+    }
+
+    .btn-doctoralia {
+        padding: 10px 38px;
+        font-size: 1.7rem;
+    }
+
+    .processo-terapeutico .carrossel > div,
+    .processo-terapeutico .carrossel > div.card-processo-visivel {
+        padding: 18px 32px 26px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .doctoralia-section {
+        padding-bottom: 56px;
+    }
+
+    .doctoralia-section .doctoralia-line {
+        margin-top: 56px;
+        margin-bottom: 96px;
+    }
+
+    .doctoralia-section .h1-depoimentos {
+        font-size: 2rem;
+        line-height: 1.15;
+    }
+
+    .depoimento-doctoralia,
+    .depoimentos:not(.doctoralia-section) .depoimento {
+        grid-template-rows: 36px 1fr 48px;
+        min-height: 300px;
+        padding: 11px 17px 14px;
+    }
+
+    .depoimento-doctoralia .doctoralia-stars {
+        font-size: 1.25rem;
+    }
+
+    .depoimento-doctoralia::after {
+        top: 14px;
+        right: 17px;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .depoimento-doctoralia .p-depoimento,
+    .depoimentos:not(.doctoralia-section) .p-depoimento {
+        font-size: 0.8rem;
+    }
+
+    .depoimentos:not(.doctoralia-section) .avaliacao-stars {
+        width: 112px;
+        height: 36px;
+    }
+
+    .depoimentos:not(.doctoralia-section) .persona-depoimento {
+        width: 52px;
+        height: 52px;
+    }
+
+    .doctoralia-perfil {
+        gap: 16px;
+        padding: 18px 20px;
+    }
+
+    .doctoralia-foto {
+        width: 84px;
+        height: 84px;
+    }
+
+    .btn-doctoralia {
+        padding: 9px 30px;
+        font-size: 1.5rem;
+    }
+
+    .processo-terapeutico .carrossel > div,
+    .processo-terapeutico .carrossel > div.card-processo-visivel {
+        padding: 17px 26px 24px;
+    }
+}
+
+@media (max-width: 900px) {
+    .doctoralia-section {
+        margin-top: 0;
+        padding-top: 1px;
+        padding-bottom: 42px;
+    }
+
+    .doctoralia-section .doctoralia-line {
+        width: 88vw;
+        margin-top: 42px;
+        margin-bottom: 100px;
+    }
+
+    .doctoralia-section .h1-depoimentos {
+        font-size: 1.35rem;
+        line-height: 1.15;
+    }
+
+    .depoimento-doctoralia,
+    .depoimentos:not(.doctoralia-section) .depoimento {
+        grid-template-rows: 32px 1fr 46px;
+        min-height: 275px;
+        padding: 10px 16px 14px;
+    }
+
+    .depoimento-doctoralia .doctoralia-stars {
+        font-size: 1.15rem;
+    }
+
+    .depoimento-doctoralia::after {
+        top: 12px;
+        right: 16px;
+        width: 1.15rem;
+        height: 1.15rem;
+    }
+
+    .depoimento-doctoralia .p-depoimento,
+    .depoimentos:not(.doctoralia-section) .p-depoimento {
+        font-size: 0.68rem;
+        line-height: 1.3;
+    }
+
+    .depoimentos:not(.doctoralia-section) .avaliacao-stars {
+        width: 105px;
+        height: 34px;
+    }
+
+    .depoimentos:not(.doctoralia-section) .persona-depoimento {
+        width: 48px;
+        height: 48px;
+    }
+
+    .processo-terapeutico .carrossel > div,
+    .processo-terapeutico .carrossel > div.card-processo-visivel {
+        padding: 16px 18px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .doctoralia-section {
+        padding-bottom: 34px;
+    }
+
+    .doctoralia-section .doctoralia-line {
+        margin-top: 34px;
+        margin-bottom: 84px;
+    }
+
+    .depoimento-doctoralia,
+    .depoimentos:not(.doctoralia-section) .depoimento {
+        grid-template-rows: 30px 1fr 42px;
+        min-height: 260px;
+        padding: 9px 14px 12px;
+    }
+
+    .depoimento-doctoralia::after {
+        top: 10px;
+        right: 14px;
+        width: 1.05rem;
+        height: 1.05rem;
+    }
+
+    .depoimento-doctoralia .p-depoimento,
+    .depoimentos:not(.doctoralia-section) .p-depoimento {
+        font-size: 0.66rem;
+    }
+
+    .depoimentos:not(.doctoralia-section) .avaliacao-stars {
+        width: 96px;
+        height: 30px;
+    }
+
+    .depoimentos:not(.doctoralia-section) .persona-depoimento {
+        width: 44px;
+        height: 44px;
+    }
+
+    .doctoralia-perfil {
+        width: 92%;
+        padding: 12px;
+    }
+
+    .btn-doctoralia {
+        font-size: 1.2rem;
+    }
+
+    .processo-terapeutico .carrossel > div,
+    .processo-terapeutico .carrossel > div.card-processo-visivel {
+        padding: 14px 14px 20px;
+    }
+}
+
+@media (min-width: 901px) {
+    .doctoralia-section .btn-doctoralia {
+        padding: 12px 50px;
+        font-size: 2.1rem;
+    }
+
+    .diferenciais {
+        top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .diferenciais .img-diferenciais {
+        right: -83px;
+        bottom: 0;
+        transform: scale(1.22);
+        transform-origin: right bottom;
+    }
+
+    .diferenciais > h1 {
+        position: relative;
+        z-index: 3;
+    }
+
 }

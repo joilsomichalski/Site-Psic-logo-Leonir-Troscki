@@ -509,54 +509,117 @@ if (elementosAnimacaoScroll.length > 0) {
     }
 }
 
-const carrosselDepoimentos = document.querySelector(".carrossel-depoimentos");
+const carrosseisDepoimentos = document.querySelectorAll(".carrossel-depoimentos");
 
-if (carrosselDepoimentos) {
-    const duracaoAnimacaoDepoimentos = 28;
+carrosseisDepoimentos.forEach((carrosselDepoimentos) => {
+    const janelaDepoimentos = carrosselDepoimentos.parentElement;
+    const reduzirMovimento = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+    const velocidadeAutomatica = 15;
+    const direcaoAutomatica = carrosselDepoimentos.classList.contains(
+        "carrossel-doctoralia"
+    ) ? 1 : -1;
+    const velocidadeMaximaArraste = 1200;
+    let distanciaLoopDepoimentos = 0;
+    let posicaoDepoimentos = 0;
+    let velocidadeInercia = 0;
     let arrastandoDepoimentos = false;
-    let inicioArrasteDepoimentos = 0;
-    let translateInicialDepoimentos = 0;
-    let translateAtualDepoimentos = 0;
+    let ponteiroAtivo = null;
+    let ultimaPosicaoPonteiro = 0;
+    let ultimoTempoPonteiro = 0;
+    let ultimoTempoAnimacao = performance.now();
+    let mouseSobreCarrossel = false;
     let quantidadeDepoimentosOriginais = 0;
+    let frameRedimensionamento = 0;
+
+    if (!janelaDepoimentos) {
+        return;
+    }
+
+    carrosselDepoimentos.classList.add("carrossel-controlado-js");
+    carrosselDepoimentos.querySelectorAll("img").forEach((imagem) => {
+        imagem.draggable = false;
+    });
 
     const obterDepoimentosOriginais = () =>
         Array.from(carrosselDepoimentos.querySelectorAll(".depoimento")).filter(
             (depoimento) => !depoimento.classList.contains("depoimento-clone")
         );
 
-    const atualizarDistanciaCarrosselDepoimentos = () => {
-        const primeiroClone = carrosselDepoimentos.querySelector(
-            ".depoimento-clone"
-        );
-        const janelaCarrossel = carrosselDepoimentos.parentElement;
-
-        if (!primeiroClone || !janelaCarrossel) {
-            return;
+    const normalizarPosicaoDepoimentos = (posicao) => {
+        if (!distanciaLoopDepoimentos) {
+            return posicao;
         }
 
+        let posicaoNormalizada = posicao;
+
+        while (posicaoNormalizada <= -distanciaLoopDepoimentos) {
+            posicaoNormalizada += distanciaLoopDepoimentos;
+        }
+
+        while (posicaoNormalizada > 0) {
+            posicaoNormalizada -= distanciaLoopDepoimentos;
+        }
+
+        return posicaoNormalizada;
+    };
+
+    const renderizarCarrosselDepoimentos = () => {
+        carrosselDepoimentos.style.transform =
+            `translate3d(${posicaoDepoimentos}px, 0, 0)`;
+    };
+
+    const atualizarMedidasCarrosselDepoimentos = () => {
         const estilosCarrossel = getComputedStyle(carrosselDepoimentos);
         const espacoEntreCards = parseFloat(estilosCarrossel.columnGap) || 0;
-        const quantidadeVisivelDepoimentos =
-            window.innerWidth <= 900 ? 1 : 3;
-        const larguraCard = window.innerWidth <= 900
-            ? Math.min(window.innerWidth * 0.78, 420)
-            : (janelaCarrossel.clientWidth -
-                espacoEntreCards * (quantidadeVisivelDepoimentos - 1)) /
+        const larguraJanelaCarrossel = janelaDepoimentos.clientWidth;
+        let quantidadeVisivelDepoimentos = 1;
+        let larguraCard = Math.max(
+            230,
+            Math.min(larguraJanelaCarrossel * 0.72, 320)
+        );
+
+        if (larguraJanelaCarrossel > 1100) {
+            quantidadeVisivelDepoimentos = 4;
+        } else if (larguraJanelaCarrossel > 820) {
+            quantidadeVisivelDepoimentos = 3;
+        } else if (larguraJanelaCarrossel > 560) {
+            quantidadeVisivelDepoimentos = 2;
+        }
+
+        if (quantidadeVisivelDepoimentos > 1) {
+            larguraCard =
+                (larguraJanelaCarrossel -
+                    espacoEntreCards * (quantidadeVisivelDepoimentos - 1)) /
                 quantidadeVisivelDepoimentos;
+        }
 
         carrosselDepoimentos.style.setProperty(
             "--largura-card-depoimento",
             `${larguraCard}px`
         );
-        carrosselDepoimentos.style.setProperty(
-            "--distancia-depoimentos",
-            `${primeiroClone.offsetLeft}px`
-        );
-        carrosselDepoimentos.classList.add("carrossel-depoimentos-ativo");
+
+        requestAnimationFrame(() => {
+            const primeiroClone = carrosselDepoimentos.querySelector(
+                ".depoimento-clone"
+            );
+
+            if (!primeiroClone) {
+                return;
+            }
+
+            distanciaLoopDepoimentos = primeiroClone.offsetLeft;
+            posicaoDepoimentos = normalizarPosicaoDepoimentos(
+                posicaoDepoimentos
+            );
+            renderizarCarrosselDepoimentos();
+        });
     };
 
     const prepararLoopCarrosselDepoimentos = () => {
         const depoimentosOriginais = obterDepoimentosOriginais();
+        const fragmentoClones = document.createDocumentFragment();
 
         carrosselDepoimentos
             .querySelectorAll(".depoimento-clone")
@@ -569,14 +632,24 @@ if (carrosselDepoimentos) {
 
             clone.setAttribute("aria-hidden", "true");
             clone.classList.add("depoimento-clone");
-            carrosselDepoimentos.appendChild(clone);
+            clone.querySelectorAll("img").forEach((imagem) => {
+                imagem.draggable = false;
+            });
+            fragmentoClones.appendChild(clone);
         });
 
-        requestAnimationFrame(atualizarDistanciaCarrosselDepoimentos);
+        carrosselDepoimentos.appendChild(fragmentoClones);
+        atualizarMedidasCarrosselDepoimentos();
     };
 
     prepararLoopCarrosselDepoimentos();
-    window.addEventListener("resize", atualizarDistanciaCarrosselDepoimentos);
+
+    window.addEventListener("resize", () => {
+        cancelAnimationFrame(frameRedimensionamento);
+        frameRedimensionamento = requestAnimationFrame(
+            atualizarMedidasCarrosselDepoimentos
+        );
+    });
 
     const observerNovosDepoimentos = new MutationObserver(() => {
         const totalAtual = obterDepoimentosOriginais().length;
@@ -590,118 +663,119 @@ if (carrosselDepoimentos) {
         childList: true,
     });
 
-    const obterDistanciaCarrosselDepoimentos = () =>
-        parseFloat(
-            getComputedStyle(carrosselDepoimentos).getPropertyValue(
-                "--distancia-depoimentos"
-            )
-        ) || 0;
-
-    const obterTranslateXCarrosselDepoimentos = () => {
-        const transform = getComputedStyle(carrosselDepoimentos).transform;
-
-        if (!transform || transform === "none") {
-            return 0;
-        }
-
-        return new DOMMatrixReadOnly(transform).m41;
-    };
-
-    const normalizarTranslateCarrosselDepoimentos = (valor) => {
-        const distancia = obterDistanciaCarrosselDepoimentos();
-
-        if (!distancia) {
-            return valor;
-        }
-
-        let translateNormalizado = valor;
-
-        while (translateNormalizado > 0) {
-            translateNormalizado -= distancia;
-        }
-
-        while (translateNormalizado < -distancia) {
-            translateNormalizado += distancia;
-        }
-
-        return translateNormalizado;
-    };
-
-    const continuarAnimacaoCarrosselDepoimentos = () => {
-        const distancia = obterDistanciaCarrosselDepoimentos();
-        const progresso = distancia
-            ? Math.abs(translateAtualDepoimentos) / distancia
-            : 0;
-
-        carrosselDepoimentos.style.setProperty(
-            "--depoimentos-animation-delay",
-            `${-(progresso * duracaoAnimacaoDepoimentos)}s`
+    const limitarVelocidade = (velocidade) =>
+        Math.max(
+            -velocidadeMaximaArraste,
+            Math.min(velocidadeMaximaArraste, velocidade)
         );
-        carrosselDepoimentos.style.transform = "";
-        carrosselDepoimentos.classList.remove("carrossel-depoimentos-ativo");
-        carrosselDepoimentos.offsetWidth;
-        carrosselDepoimentos.classList.add("carrossel-depoimentos-ativo");
+
+    const liberarPonteiroDepoimentos = (evento) => {
+        if (
+            evento &&
+            janelaDepoimentos.hasPointerCapture?.(evento.pointerId)
+        ) {
+            janelaDepoimentos.releasePointerCapture(evento.pointerId);
+        }
     };
 
-    const janelaDepoimentos = carrosselDepoimentos.parentElement;
+    const finalizarArrasteDepoimentos = (evento, manterInercia = true) => {
+        if (!arrastandoDepoimentos || evento.pointerId !== ponteiroAtivo) {
+            return;
+        }
 
-    if (janelaDepoimentos) {
-        const liberarPonteiroDepoimentos = (evento) => {
-            if (
-                evento &&
-                typeof janelaDepoimentos.releasePointerCapture === "function"
-            ) {
-                try {
-                    janelaDepoimentos.releasePointerCapture(evento.pointerId);
-                } catch {
-                    // Alguns navegadores liberam o ponteiro automaticamente.
+        arrastandoDepoimentos = false;
+        ponteiroAtivo = null;
+        janelaDepoimentos.classList.remove("arrastando");
+
+        if (!manterInercia || reduzirMovimento.matches) {
+            velocidadeInercia = 0;
+        }
+
+        liberarPonteiroDepoimentos(evento);
+    };
+
+    janelaDepoimentos.addEventListener("pointerdown", (evento) => {
+        if (!evento.isPrimary || (evento.pointerType === "mouse" && evento.button !== 0)) {
+            return;
+        }
+
+        arrastandoDepoimentos = true;
+        ponteiroAtivo = evento.pointerId;
+        ultimaPosicaoPonteiro = evento.clientX;
+        ultimoTempoPonteiro = evento.timeStamp;
+        velocidadeInercia = 0;
+        janelaDepoimentos.classList.add("arrastando");
+        janelaDepoimentos.setPointerCapture?.(evento.pointerId);
+    });
+
+    janelaDepoimentos.addEventListener("pointermove", (evento) => {
+        if (!arrastandoDepoimentos || evento.pointerId !== ponteiroAtivo) {
+            return;
+        }
+
+        const deslocamento = evento.clientX - ultimaPosicaoPonteiro;
+        const tempoDecorrido = Math.max(evento.timeStamp - ultimoTempoPonteiro, 8);
+        const velocidadeInstantanea = (deslocamento / tempoDecorrido) * 1000;
+
+        velocidadeInercia = limitarVelocidade(
+            velocidadeInercia * 0.65 + velocidadeInstantanea * 0.35
+        );
+        posicaoDepoimentos = normalizarPosicaoDepoimentos(
+            posicaoDepoimentos + deslocamento
+        );
+        ultimaPosicaoPonteiro = evento.clientX;
+        ultimoTempoPonteiro = evento.timeStamp;
+        renderizarCarrosselDepoimentos();
+    });
+
+    janelaDepoimentos.addEventListener("pointerup", (evento) => {
+        finalizarArrasteDepoimentos(evento);
+    });
+    janelaDepoimentos.addEventListener("pointercancel", (evento) => {
+        finalizarArrasteDepoimentos(evento, false);
+    });
+    janelaDepoimentos.addEventListener("dragstart", (evento) => {
+        evento.preventDefault();
+    });
+    janelaDepoimentos.addEventListener("mouseenter", () => {
+        mouseSobreCarrossel = true;
+    });
+    janelaDepoimentos.addEventListener("mouseleave", () => {
+        mouseSobreCarrossel = false;
+    });
+
+    const animarCarrosselDepoimentos = (tempoAtual) => {
+        const tempoDecorrido = Math.min(
+            (tempoAtual - ultimoTempoAnimacao) / 1000,
+            0.05
+        );
+
+        ultimoTempoAnimacao = tempoAtual;
+
+        if (!arrastandoDepoimentos && distanciaLoopDepoimentos) {
+            if (Math.abs(velocidadeInercia) > 1) {
+                posicaoDepoimentos += velocidadeInercia * tempoDecorrido;
+                velocidadeInercia *= Math.pow(0.045, tempoDecorrido);
+            } else {
+                velocidadeInercia = 0;
+
+                if (!mouseSobreCarrossel && !reduzirMovimento.matches) {
+                    posicaoDepoimentos +=
+                        direcaoAutomatica * velocidadeAutomatica * tempoDecorrido;
                 }
             }
-        };
 
-        const finalizarArrasteDepoimentos = (evento) => {
-            if (!arrastandoDepoimentos) {
-                return;
-            }
-
-            arrastandoDepoimentos = false;
-            janelaDepoimentos.classList.remove("arrastando");
-            liberarPonteiroDepoimentos(evento);
-            continuarAnimacaoCarrosselDepoimentos();
-        };
-
-        janelaDepoimentos.addEventListener("pointerdown", (evento) => {
-            arrastandoDepoimentos = true;
-            inicioArrasteDepoimentos = evento.clientX;
-            translateInicialDepoimentos = obterTranslateXCarrosselDepoimentos();
-            translateAtualDepoimentos = translateInicialDepoimentos;
-
-            janelaDepoimentos.classList.add("arrastando");
-            if (typeof janelaDepoimentos.setPointerCapture === "function") {
-                janelaDepoimentos.setPointerCapture(evento.pointerId);
-            }
-            carrosselDepoimentos.style.transform = `translateX(${translateAtualDepoimentos}px)`;
-            evento.preventDefault();
-        });
-
-        janelaDepoimentos.addEventListener("pointermove", (evento) => {
-            if (!arrastandoDepoimentos) {
-                return;
-            }
-
-            const distanciaArrastada = evento.clientX - inicioArrasteDepoimentos;
-
-            translateAtualDepoimentos = normalizarTranslateCarrosselDepoimentos(
-                translateInicialDepoimentos + distanciaArrastada
+            posicaoDepoimentos = normalizarPosicaoDepoimentos(
+                posicaoDepoimentos
             );
-            carrosselDepoimentos.style.transform = `translateX(${translateAtualDepoimentos}px)`;
-        });
+            renderizarCarrosselDepoimentos();
+        }
 
-        janelaDepoimentos.addEventListener("pointerup", finalizarArrasteDepoimentos);
-        janelaDepoimentos.addEventListener("pointercancel", finalizarArrasteDepoimentos);
-        janelaDepoimentos.addEventListener("pointerleave", finalizarArrasteDepoimentos);
-    }
-}
+        requestAnimationFrame(animarCarrosselDepoimentos);
+    };
+
+    requestAnimationFrame(animarCarrosselDepoimentos);
+});
 
 const perguntasFrequentes = document.querySelectorAll(".pergunta");
 
